@@ -23,9 +23,11 @@ create table Team(
 );
 
 create table TournamentParticipation(
+	Id integer primary key identity (1, 1),
 	TeamId integer not null foreign key references Team(Id),
 	TournamentId integer not null foreign key references Tournament(Id),
-	constraint pk_tournament_participation primary key (TeamId, TournamentId)
+	GroupNumber integer null,
+	GroupLetter varchar(1) null
 );
 
 create table Player(
@@ -34,11 +36,29 @@ create table Player(
 	LastName varchar(100) not null,
 	Position varchar(50) not null,
 	ShirtNumber integer not null,
-	DateOfBirth datetime not null
+	DateOfBirth datetime not null,
+	TeamId integer foreign key references Team(Id)
 );
 
-create table TeamMember(
+create table [Match](
+	Id integer primary key identity(1, 1),
+	StageCode varchar(3) not null,
+	TeamA integer not null foreign key references TournamentParticipation(Id),
+	TeamB integer not null foreign key references TournamentParticipation(Id)
+);
+
+create table MatchParticipation(
 	PlayerId integer not null foreign key references Player(Id),
-	TeamId integer not null foreign key references Team(Id),
-	constraint pk_team_member primary key(PlayerId, TeamId)
+	MatchId integer not null foreign key references [Match](Id),
+	Position varchar(50) null,
+	constraint fk_match_participation primary key (PlayerId, MatchId)
+);
+
+create table MatchEvents(
+	Id integer primary key identity(1, 1),
+	MatchId integer not null foreign key references Match(Id),
+	MatchMinute integer not null,
+	TeamA bit not null,
+	EventType varchar(10) not null,
+	AdditionalInformation varchar(200) not null
 );
