@@ -48,10 +48,10 @@ create table [Match](
 );
 
 create table MatchParticipation(
+	Id integer primary key identity(1, 1),
 	PlayerId integer not null foreign key references Player(Id),
 	MatchId integer not null foreign key references [Match](Id),
-	Position varchar(50) null,
-	constraint fk_match_participation primary key (PlayerId, MatchId)
+	Position varchar(50) null
 );
 
 create table MatchEvents(
