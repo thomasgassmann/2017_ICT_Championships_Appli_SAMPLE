@@ -1,0 +1,607 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StageCode" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="TeamA" Type="int" Nullable="false" />
+          <Property Name="TeamB" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MatchEvents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MatchId" Type="int" Nullable="false" />
+          <Property Name="MatchMinute" Type="int" Nullable="false" />
+          <Property Name="TeamA" Type="bit" Nullable="false" />
+          <Property Name="EventType" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="AdditionalInformation" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MatchParticipation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="MatchId" Type="int" Nullable="false" />
+          <Property Name="Position" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Position" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShirtNumber" Type="int" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="TeamId" Type="int" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryCode" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="FlagContent" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tournament">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TournamentParticipation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamId" Type="int" Nullable="false" />
+          <Property Name="TournamentId" Type="int" Nullable="false" />
+          <Property Name="GroupNumber" Type="int" />
+          <Property Name="GroupLetter" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK__Match__TeamA__44FF419A">
+          <End Role="TournamentParticipation" Type="Self.TournamentParticipation" Multiplicity="1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TournamentParticipation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="TeamA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match__TeamB__45F365D3">
+          <End Role="TournamentParticipation" Type="Self.TournamentParticipation" Multiplicity="1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TournamentParticipation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="TeamB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatchEven__Match__4CA06362">
+          <End Role="Match" Type="Self.Match" Multiplicity="1" />
+          <End Role="MatchEvents" Type="Self.MatchEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchEvents">
+              <PropertyRef Name="MatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatchPart__Match__49C3F6B7">
+          <End Role="Match" Type="Self.Match" Multiplicity="1" />
+          <End Role="MatchParticipation" Type="Self.MatchParticipation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchParticipation">
+              <PropertyRef Name="MatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatchPart__Playe__48CFD27E">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="MatchParticipation" Type="Self.MatchParticipation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchParticipation">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Player__TeamId__4222D4EF">
+          <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+          <End Role="Player" Type="Self.Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Team__RegionId__3B75D760">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tournamen__TeamI__3E52440B">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="TournamentParticipation" Type="Self.TournamentParticipation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TournamentParticipation">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tournamen__Tourn__3F466844">
+          <End Role="Tournament" Type="Self.Tournament" Multiplicity="1" />
+          <End Role="TournamentParticipation" Type="Self.TournamentParticipation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tournament">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TournamentParticipation">
+              <PropertyRef Name="TournamentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Match" EntityType="Self.Match" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MatchEvents" EntityType="Self.MatchEvents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MatchParticipation" EntityType="Self.MatchParticipation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tournament" EntityType="Self.Tournament" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TournamentParticipation" EntityType="Self.TournamentParticipation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Match__TeamA__44FF419A" Association="Self.FK__Match__TeamA__44FF419A">
+            <End Role="TournamentParticipation" EntitySet="TournamentParticipation" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match__TeamB__45F365D3" Association="Self.FK__Match__TeamB__45F365D3">
+            <End Role="TournamentParticipation" EntitySet="TournamentParticipation" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatchEven__Match__4CA06362" Association="Self.FK__MatchEven__Match__4CA06362">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="MatchEvents" EntitySet="MatchEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatchPart__Match__49C3F6B7" Association="Self.FK__MatchPart__Match__49C3F6B7">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="MatchParticipation" EntitySet="MatchParticipation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatchPart__Playe__48CFD27E" Association="Self.FK__MatchPart__Playe__48CFD27E">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="MatchParticipation" EntitySet="MatchParticipation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Player__TeamId__4222D4EF" Association="Self.FK__Player__TeamId__4222D4EF">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Player" EntitySet="Player" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team__RegionId__3B75D760" Association="Self.FK__Team__RegionId__3B75D760">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tournamen__TeamI__3E52440B" Association="Self.FK__Tournamen__TeamI__3E52440B">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TournamentParticipation" EntitySet="TournamentParticipation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tournamen__Tourn__3F466844" Association="Self.FK__Tournamen__Tourn__3F466844">
+            <End Role="Tournament" EntitySet="Tournament" />
+            <End Role="TournamentParticipation" EntitySet="TournamentParticipation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TeamA" Type="Int32" Nullable="false" />
+          <Property Name="TeamB" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TournamentParticipation" Relationship="Self.FK__Match__TeamA__44FF419A" FromRole="Match" ToRole="TournamentParticipation" />
+          <NavigationProperty Name="TournamentParticipation1" Relationship="Self.FK__Match__TeamB__45F365D3" FromRole="Match" ToRole="TournamentParticipation" />
+          <NavigationProperty Name="MatchEvents" Relationship="Self.FK__MatchEven__Match__4CA06362" FromRole="Match" ToRole="MatchEvents" />
+          <NavigationProperty Name="MatchParticipations" Relationship="Self.FK__MatchPart__Match__49C3F6B7" FromRole="Match" ToRole="MatchParticipation" />
+        </EntityType>
+        <EntityType Name="MatchEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MatchId" Type="Int32" Nullable="false" />
+          <Property Name="MatchMinute" Type="Int32" Nullable="false" />
+          <Property Name="TeamA" Type="Boolean" Nullable="false" />
+          <Property Name="EventType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdditionalInformation" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Match" Relationship="Self.FK__MatchEven__Match__4CA06362" FromRole="MatchEvents" ToRole="Match" />
+        </EntityType>
+        <EntityType Name="MatchParticipation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="MatchId" Type="Int32" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Match" Relationship="Self.FK__MatchPart__Match__49C3F6B7" FromRole="MatchParticipation" ToRole="Match" />
+          <NavigationProperty Name="Player" Relationship="Self.FK__MatchPart__Playe__48CFD27E" FromRole="MatchParticipation" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ShirtNumber" Type="Int32" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TeamId" Type="Int32" />
+          <NavigationProperty Name="MatchParticipations" Relationship="Self.FK__MatchPart__Playe__48CFD27E" FromRole="Player" ToRole="MatchParticipation" />
+          <NavigationProperty Name="Team" Relationship="Self.FK__Player__TeamId__4222D4EF" FromRole="Player" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Teams" Relationship="Self.FK__Team__RegionId__3B75D760" FromRole="Region" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CountryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="FlagContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Players" Relationship="Self.FK__Player__TeamId__4222D4EF" FromRole="Team" ToRole="Player" />
+          <NavigationProperty Name="Region" Relationship="Self.FK__Team__RegionId__3B75D760" FromRole="Team" ToRole="Region" />
+          <NavigationProperty Name="TournamentParticipations" Relationship="Self.FK__Tournamen__TeamI__3E52440B" FromRole="Team" ToRole="TournamentParticipation" />
+        </EntityType>
+        <EntityType Name="Tournament">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TournamentParticipations" Relationship="Self.FK__Tournamen__Tourn__3F466844" FromRole="Tournament" ToRole="TournamentParticipation" />
+        </EntityType>
+        <EntityType Name="TournamentParticipation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamId" Type="Int32" Nullable="false" />
+          <Property Name="TournamentId" Type="Int32" Nullable="false" />
+          <Property Name="GroupNumber" Type="Int32" />
+          <Property Name="GroupLetter" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Matches" Relationship="Self.FK__Match__TeamA__44FF419A" FromRole="TournamentParticipation" ToRole="Match" />
+          <NavigationProperty Name="Matches1" Relationship="Self.FK__Match__TeamB__45F365D3" FromRole="TournamentParticipation" ToRole="Match" />
+          <NavigationProperty Name="Team" Relationship="Self.FK__Tournamen__TeamI__3E52440B" FromRole="TournamentParticipation" ToRole="Team" />
+          <NavigationProperty Name="Tournament" Relationship="Self.FK__Tournamen__Tourn__3F466844" FromRole="TournamentParticipation" ToRole="Tournament" />
+        </EntityType>
+        <Association Name="FK__Match__TeamA__44FF419A">
+          <End Role="TournamentParticipation" Type="Self.TournamentParticipation" Multiplicity="1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TournamentParticipation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="TeamA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match__TeamB__45F365D3">
+          <End Role="TournamentParticipation" Type="Self.TournamentParticipation" Multiplicity="1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TournamentParticipation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="TeamB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatchEven__Match__4CA06362">
+          <End Role="Match" Type="Self.Match" Multiplicity="1" />
+          <End Role="MatchEvents" Type="Self.MatchEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchEvents">
+              <PropertyRef Name="MatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatchPart__Match__49C3F6B7">
+          <End Role="Match" Type="Self.Match" Multiplicity="1" />
+          <End Role="MatchParticipation" Type="Self.MatchParticipation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchParticipation">
+              <PropertyRef Name="MatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatchPart__Playe__48CFD27E">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="MatchParticipation" Type="Self.MatchParticipation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchParticipation">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Player__TeamId__4222D4EF">
+          <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+          <End Role="Player" Type="Self.Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Team__RegionId__3B75D760">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tournamen__TeamI__3E52440B">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="TournamentParticipation" Type="Self.TournamentParticipation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TournamentParticipation">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tournamen__Tourn__3F466844">
+          <End Role="Tournament" Type="Self.Tournament" Multiplicity="1" />
+          <End Role="TournamentParticipation" Type="Self.TournamentParticipation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tournament">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TournamentParticipation">
+              <PropertyRef Name="TournamentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EUFAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Matches" EntityType="Self.Match" />
+          <EntitySet Name="MatchEvents" EntityType="Self.MatchEvent" />
+          <EntitySet Name="MatchParticipations" EntityType="Self.MatchParticipation" />
+          <EntitySet Name="Players" EntityType="Self.Player" />
+          <EntitySet Name="Regions" EntityType="Self.Region" />
+          <EntitySet Name="Teams" EntityType="Self.Team" />
+          <EntitySet Name="Tournaments" EntityType="Self.Tournament" />
+          <EntitySet Name="TournamentParticipations" EntityType="Self.TournamentParticipation" />
+          <AssociationSet Name="FK__Match__TeamA__44FF419A" Association="Self.FK__Match__TeamA__44FF419A">
+            <End Role="TournamentParticipation" EntitySet="TournamentParticipations" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match__TeamB__45F365D3" Association="Self.FK__Match__TeamB__45F365D3">
+            <End Role="TournamentParticipation" EntitySet="TournamentParticipations" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatchEven__Match__4CA06362" Association="Self.FK__MatchEven__Match__4CA06362">
+            <End Role="Match" EntitySet="Matches" />
+            <End Role="MatchEvents" EntitySet="MatchEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatchPart__Match__49C3F6B7" Association="Self.FK__MatchPart__Match__49C3F6B7">
+            <End Role="Match" EntitySet="Matches" />
+            <End Role="MatchParticipation" EntitySet="MatchParticipations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatchPart__Playe__48CFD27E" Association="Self.FK__MatchPart__Playe__48CFD27E">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="MatchParticipation" EntitySet="MatchParticipations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Player__TeamId__4222D4EF" Association="Self.FK__Player__TeamId__4222D4EF">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Player" EntitySet="Players" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team__RegionId__3B75D760" Association="Self.FK__Team__RegionId__3B75D760">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tournamen__TeamI__3E52440B" Association="Self.FK__Tournamen__TeamI__3E52440B">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="TournamentParticipation" EntitySet="TournamentParticipations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tournamen__Tourn__3F466844" Association="Self.FK__Tournamen__Tourn__3F466844">
+            <End Role="Tournament" EntitySet="Tournaments" />
+            <End Role="TournamentParticipation" EntitySet="TournamentParticipations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="EUFAEntities">
+          <EntitySetMapping Name="Matches">
+            <EntityTypeMapping TypeName="Model.Match">
+              <MappingFragment StoreEntitySet="Match">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StageCode" ColumnName="StageCode" />
+                <ScalarProperty Name="TeamA" ColumnName="TeamA" />
+                <ScalarProperty Name="TeamB" ColumnName="TeamB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MatchEvents">
+            <EntityTypeMapping TypeName="Model.MatchEvent">
+              <MappingFragment StoreEntitySet="MatchEvents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+                <ScalarProperty Name="MatchMinute" ColumnName="MatchMinute" />
+                <ScalarProperty Name="TeamA" ColumnName="TeamA" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="AdditionalInformation" ColumnName="AdditionalInformation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MatchParticipations">
+            <EntityTypeMapping TypeName="Model.MatchParticipation">
+              <MappingFragment StoreEntitySet="MatchParticipation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="Model.Player">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="ShirtNumber" ColumnName="ShirtNumber" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="Model.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="Model.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="FlagContent" ColumnName="FlagContent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tournaments">
+            <EntityTypeMapping TypeName="Model.Tournament">
+              <MappingFragment StoreEntitySet="Tournament">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TournamentParticipations">
+            <EntityTypeMapping TypeName="Model.TournamentParticipation">
+              <MappingFragment StoreEntitySet="TournamentParticipation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="TournamentId" ColumnName="TournamentId" />
+                <ScalarProperty Name="GroupNumber" ColumnName="GroupNumber" />
+                <ScalarProperty Name="GroupLetter" ColumnName="GroupLetter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

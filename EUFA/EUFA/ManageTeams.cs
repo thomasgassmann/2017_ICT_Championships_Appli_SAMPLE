@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace EUFA
 {
-    public partial class Form1 : Form
+    public partial class ManageTeams : Form
     {
-        public Form1()
+        public ManageTeams()
         {
             InitializeComponent();
         }
