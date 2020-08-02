@@ -1,3 +1,5 @@
+drop database if exists ictskills;
+go
 create database ictskills;
 go
 use ictskills;
@@ -13,6 +15,10 @@ create table Region(
 	Id integer primary key identity(1, 1),
 	RegionName varchar(100) not null
 );
+go
+
+insert into Region(RegionName) values (' Africa'), ('America'), ('Asia'), ('Europe'), ('Oceania');
+
 go
 create table Team(
 	Id integer primary key identity(1, 1),
