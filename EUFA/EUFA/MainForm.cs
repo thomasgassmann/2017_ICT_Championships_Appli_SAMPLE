@@ -28,7 +28,7 @@ namespace EUFA
 
         private void ManageTournaments_Click(object sender, EventArgs e)
         {
-
+            new ManageTournaments().ShowDialog();
         }
 
         private void ManageTeams_Click(object sender, EventArgs e)

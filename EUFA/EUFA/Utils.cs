@@ -10,7 +10,7 @@ namespace EUFA
     {
         public static string FormatFromTo(DateTime from, DateTime to)
         {
-            return $"{from.ToShortDateString()} - {to.ToShortDateString()}";
+            return $"{from.ToString("dd.MM.yy")} - {to.ToString("dd.MM.yy")}";
         }
     }
 }

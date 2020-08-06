@@ -49,8 +49,8 @@ go
 create table [Match](
 	Id integer primary key identity(1, 1),
 	StageCode varchar(3) not null,
-	TeamA integer not null foreign key references TournamentParticipation(Id) on delete cascade,
-	TeamB integer not null foreign key references TournamentParticipation(Id) on delete cascade
+	TeamA integer not null foreign key references TournamentParticipation(Id),
+	TeamB integer not null foreign key references TournamentParticipation(Id)
 );
 go
 create table MatchParticipation(
