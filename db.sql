@@ -31,7 +31,7 @@ go
 create table TournamentParticipation(
 	Id integer primary key identity (1, 1),
 	TeamId integer not null foreign key references Team(Id),
-	TournamentId integer not null foreign key references Tournament(Id),
+	TournamentId integer not null foreign key references Tournament(Id) on delete cascade,
 	GroupNumber integer null,
 	GroupLetter varchar(1) null
 );
@@ -49,8 +49,8 @@ go
 create table [Match](
 	Id integer primary key identity(1, 1),
 	StageCode varchar(3) not null,
-	TeamA integer not null foreign key references TournamentParticipation(Id),
-	TeamB integer not null foreign key references TournamentParticipation(Id)
+	TeamA integer not null foreign key references TournamentParticipation(Id) on delete cascade,
+	TeamB integer not null foreign key references TournamentParticipation(Id) on delete cascade
 );
 go
 create table MatchParticipation(
