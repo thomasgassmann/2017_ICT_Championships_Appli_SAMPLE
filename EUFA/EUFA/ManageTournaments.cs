@@ -31,14 +31,14 @@ namespace EUFA
 
         private void Add_Click(object sender, System.EventArgs e)
         {
-
+            new AddEditTournament(null).ShowDialog();
         }
 
         private void Edit_Click(object sender, System.EventArgs e)
         {
             ExecuteWithSelected(t =>
             {
-
+                new AddEditTournament(t).ShowDialog();
             });
         }
 
