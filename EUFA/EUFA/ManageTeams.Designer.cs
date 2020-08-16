@@ -57,6 +57,7 @@
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(264, 31);
             this.tbSearch.TabIndex = 1;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
             // 
             // button1
             // 
@@ -101,6 +102,7 @@
             // 
             // teamGrid
             // 
+            this.teamGrid.AllowUserToAddRows = false;
             this.teamGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -113,8 +115,11 @@
             this.teamGrid.Location = new System.Drawing.Point(12, 83);
             this.teamGrid.MultiSelect = false;
             this.teamGrid.Name = "teamGrid";
+            this.teamGrid.ReadOnly = true;
+            this.teamGrid.RowHeadersVisible = false;
             this.teamGrid.RowHeadersWidth = 82;
             this.teamGrid.RowTemplate.Height = 33;
+            this.teamGrid.ShowEditingIcon = false;
             this.teamGrid.Size = new System.Drawing.Size(1128, 663);
             this.teamGrid.TabIndex = 7;
             // 
@@ -124,15 +129,16 @@
             this.Column1.MinimumWidth = 10;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
-            this.Column1.Width = 200;
+            this.Column1.Width = 30;
             // 
             // Flag
             // 
             this.Flag.HeaderText = "Flag";
+            this.Flag.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.Flag.MinimumWidth = 10;
             this.Flag.Name = "Flag";
             this.Flag.ReadOnly = true;
-            this.Flag.Width = 200;
+            this.Flag.Width = 50;
             // 
             // Team
             // 
@@ -140,7 +146,7 @@
             this.Team.MinimumWidth = 10;
             this.Team.Name = "Team";
             this.Team.ReadOnly = true;
-            this.Team.Width = 200;
+            this.Team.Width = 150;
             // 
             // Code
             // 
@@ -148,7 +154,7 @@
             this.Code.MinimumWidth = 10;
             this.Code.Name = "Code";
             this.Code.ReadOnly = true;
-            this.Code.Width = 200;
+            this.Code.Width = 50;
             // 
             // ManageTeams
             // 
