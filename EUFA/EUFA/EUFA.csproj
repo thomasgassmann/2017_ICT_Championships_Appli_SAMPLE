@@ -147,6 +147,9 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ManageTeams.resx">
+      <DependentUpon>ManageTeams.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ManageTournaments.resx">
       <DependentUpon>ManageTournaments.cs</DependentUpon>
     </EmbeddedResource>

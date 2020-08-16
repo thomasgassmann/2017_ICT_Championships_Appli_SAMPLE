@@ -33,7 +33,7 @@ namespace EUFA
 
         private void ManageTeams_Click(object sender, EventArgs e)
         {
-
+            new ManageTeams().ShowDialog();
         }
 
         private void ManageExecution_Click(object sender, EventArgs e)
