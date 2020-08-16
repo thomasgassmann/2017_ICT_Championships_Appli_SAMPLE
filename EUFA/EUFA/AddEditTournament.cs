@@ -33,6 +33,11 @@ namespace EUFA
             dateStart.Value = t.StartDate;
             dateEnd.Value = t.EndDate;
             LoadTeams();
+
+            this.listTeams.Items.Cast<ListViewItem>()
+                .Where(x => t.TournamentParticipations.Select(p => p.TeamId).Contains((x.Tag as Team).Id))
+                .ToList()
+                .ForEach(x => x.Selected = true);
         }
 
         private void ValidateForm()
@@ -62,6 +67,8 @@ namespace EUFA
                 lvi.Tag = x;
                 listTeams.Items.Add(lvi);
             });
+
+            SetParticipantCount();
         }
 
         private void regionsFilter_RegionChange(object sender, Controls.RegionChangedEventArgs e)
@@ -94,7 +101,7 @@ namespace EUFA
                         .Select(x => new TournamentParticipation
                         {
                             TeamId = x.Id
-                        }).ToList()
+                        }).ToList();
             if (tournament == null)
             {
                 data.Tournaments.Add(new Tournament
