@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEditTeam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditTeam.Designer.cs">
+      <DependentUpon>AddEditTeam.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEditTournament.cs">
       <SubType>Form</SubType>
     </Compile>
