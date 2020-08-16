@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEditTournament));
             this.label1 = new System.Windows.Forms.Label();
             this.tbTournamentName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,6 +39,10 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label4 = new System.Windows.Forms.Label();
+            this.lbParticipantCount = new System.Windows.Forms.Label();
+            this.regionFilter1 = new EUFA.Controls.RegionFilter();
+            this.regionFilter2 = new EUFA.Controls.RegionFilter();
+            this.regionsFilter = new EUFA.Controls.RegionFilter();
             this.SuspendLayout();
             // 
             // label1
@@ -129,11 +134,47 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Participating Teams";
             // 
+            // lbParticipantCount
+            // 
+            this.lbParticipantCount.AutoSize = true;
+            this.lbParticipantCount.Location = new System.Drawing.Point(12, 259);
+            this.lbParticipantCount.Name = "lbParticipantCount";
+            this.lbParticipantCount.Size = new System.Drawing.Size(70, 25);
+            this.lbParticipantCount.TabIndex = 10;
+            this.lbParticipantCount.Text = "label5";
+            // 
+            // regionFilter1
+            // 
+            this.regionFilter1.Location = new System.Drawing.Point(0, 0);
+            this.regionFilter1.Name = "regionFilter1";
+            this.regionFilter1.Regions = ((System.Collections.Generic.List<EUFA.Controls.RegionItem>)(resources.GetObject("regionFilter1.Regions")));
+            this.regionFilter1.Size = new System.Drawing.Size(404, 439);
+            this.regionFilter1.TabIndex = 0;
+            // 
+            // regionFilter2
+            // 
+            this.regionFilter2.Location = new System.Drawing.Point(0, 0);
+            this.regionFilter2.Name = "regionFilter2";
+            this.regionFilter2.Regions = ((System.Collections.Generic.List<EUFA.Controls.RegionItem>)(resources.GetObject("regionFilter2.Regions")));
+            this.regionFilter2.Size = new System.Drawing.Size(404, 439);
+            this.regionFilter2.TabIndex = 0;
+            // 
+            // regionsFilter
+            // 
+            this.regionsFilter.Location = new System.Drawing.Point(12, 324);
+            this.regionsFilter.Name = "regionsFilter";
+            this.regionsFilter.Regions = ((System.Collections.Generic.List<EUFA.Controls.RegionItem>)(resources.GetObject("regionsFilter.Regions")));
+            this.regionsFilter.Size = new System.Drawing.Size(384, 439);
+            this.regionsFilter.TabIndex = 11;
+            this.regionsFilter.RegionChange += new System.EventHandler<EUFA.Controls.RegionChangedEventArgs>(this.regionsFilter_RegionChange);
+            // 
             // AddEditTournament
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1120, 951);
+            this.Controls.Add(this.regionsFilter);
+            this.Controls.Add(this.lbParticipantCount);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.dateEnd);
@@ -144,6 +185,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AddEditTournament";
             this.Text = "Add/Edit Tournament";
+            this.Load += new System.EventHandler(this.AddEditTournament_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,5 +203,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbParticipantCount;
+        private Controls.RegionFilter regionFilter1;
+        private Controls.RegionFilter regionFilter2;
+        private Controls.RegionFilter regionsFilter;
     }
 }
