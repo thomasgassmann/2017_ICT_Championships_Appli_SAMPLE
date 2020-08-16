@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -14,6 +15,7 @@ namespace EUFA.Controls
             InitializeComponent();
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<RegionItem> Regions
         {
             get => regions;
@@ -41,6 +43,7 @@ namespace EUFA.Controls
             var rb = new RadioButton()
             {
                 Text = region?.Name ?? "All",
+                Checked = region == null
             };
 
             rb.CheckedChanged += (e, v) =>
