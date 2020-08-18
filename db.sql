@@ -25,7 +25,10 @@ create table Team(
 	CountryCode varchar(3) not null,
 	CountryName varchar(100) not null,
 	RegionId integer not null foreign key references Region(Id),
-	FlagContent varbinary(max)
+	FlagContent varbinary(max),
+	constraint CountryCode_Unique unique(CountryCode),
+	constraint CoutnryName_Unique unique(CountryName),
+	constraint CountryCode_Length check(len(CountryCode) = 3)
 );
 go
 create table TournamentParticipation(
