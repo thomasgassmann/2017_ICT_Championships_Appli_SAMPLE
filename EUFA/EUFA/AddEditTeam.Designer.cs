@@ -31,11 +31,11 @@
             this.entityConnection1 = new System.Data.Entity.Core.EntityClient.EntityConnection();
             this.label1 = new System.Windows.Forms.Label();
             this.tbTeamName = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbCountry = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cbRegion = new System.Windows.Forms.ComboBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.flagPicture = new System.Windows.Forms.PictureBox();
             this.btSelectFlag = new System.Windows.Forms.Button();
             this.cbPlayers = new System.Windows.Forms.GroupBox();
             this.listPlayers = new System.Windows.Forms.ListView();
@@ -47,7 +47,7 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btCancel = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flagPicture)).BeginInit();
             this.cbPlayers.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,14 +66,16 @@
             this.tbTeamName.Name = "tbTeamName";
             this.tbTeamName.Size = new System.Drawing.Size(454, 31);
             this.tbTeamName.TabIndex = 1;
+            this.tbTeamName.TextChanged += new System.EventHandler(this.tbTeamName_TextChanged);
             // 
-            // textBox2
+            // tbCountry
             // 
-            this.textBox2.Location = new System.Drawing.Point(239, 117);
-            this.textBox2.MaxLength = 3;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 31);
-            this.textBox2.TabIndex = 2;
+            this.tbCountry.Location = new System.Drawing.Point(239, 117);
+            this.tbCountry.MaxLength = 3;
+            this.tbCountry.Name = "tbCountry";
+            this.tbCountry.Size = new System.Drawing.Size(100, 31);
+            this.tbCountry.TabIndex = 2;
+            this.tbCountry.TextChanged += new System.EventHandler(this.tbCountry_TextChanged);
             // 
             // label2
             // 
@@ -102,13 +104,13 @@
             this.cbRegion.Size = new System.Drawing.Size(199, 33);
             this.cbRegion.TabIndex = 5;
             // 
-            // pictureBox1
+            // flagPicture
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(876, 39);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(112, 95);
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
+            this.flagPicture.Location = new System.Drawing.Point(876, 39);
+            this.flagPicture.Name = "flagPicture";
+            this.flagPicture.Size = new System.Drawing.Size(112, 95);
+            this.flagPicture.TabIndex = 6;
+            this.flagPicture.TabStop = false;
             // 
             // btSelectFlag
             // 
@@ -118,6 +120,7 @@
             this.btSelectFlag.TabIndex = 7;
             this.btSelectFlag.Text = "Select flag";
             this.btSelectFlag.UseVisualStyleBackColor = true;
+            this.btSelectFlag.Click += new System.EventHandler(this.btSelectFlag_Click);
             // 
             // cbPlayers
             // 
@@ -230,16 +233,16 @@
             this.Controls.Add(this.btCancel);
             this.Controls.Add(this.cbPlayers);
             this.Controls.Add(this.btSelectFlag);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.flagPicture);
             this.Controls.Add(this.cbRegion);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.tbCountry);
             this.Controls.Add(this.tbTeamName);
             this.Controls.Add(this.label1);
             this.Name = "AddEditTeam";
             this.Text = "Add/Edit Team";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flagPicture)).EndInit();
             this.cbPlayers.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -251,11 +254,11 @@
         private System.Data.Entity.Core.EntityClient.EntityConnection entityConnection1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbTeamName;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbCountry;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbRegion;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox flagPicture;
         private System.Windows.Forms.Button btSelectFlag;
         private System.Windows.Forms.GroupBox cbPlayers;
         private System.Windows.Forms.ListView listPlayers;

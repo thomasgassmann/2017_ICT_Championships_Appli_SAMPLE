@@ -143,6 +143,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="AddEditTeam.resx">
+      <DependentUpon>AddEditTeam.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddEditTournament.resx">
       <DependentUpon>AddEditTournament.cs</DependentUpon>
       <SubType>Designer</SubType>
