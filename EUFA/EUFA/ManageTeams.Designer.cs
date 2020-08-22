@@ -68,6 +68,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.AddTEam_Click);
             // 
             // button2
             // 
@@ -78,6 +79,7 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "Edit";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.EditTEam_Click);
             // 
             // button3
             // 

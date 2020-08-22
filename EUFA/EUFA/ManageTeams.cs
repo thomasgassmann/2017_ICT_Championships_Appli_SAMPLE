@@ -1,5 +1,6 @@
 ﻿using EUFA.Data;
 using EUFA.Properties;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -48,6 +49,49 @@ namespace EUFA
         {
             filteredTeams = teams.Where(x => x.CountryName.Contains(this.tbSearch.Text)).ToList();
             DisplayTeams();
+        }
+
+        private void AddTEam_Click(object sender, System.EventArgs e)
+        {
+            if (new AddEditTeam(null).ShowDialog() == DialogResult.OK)
+            {
+                LoadTeams();
+                DisplayTeams();
+            }
+        }
+
+        private void WithSelected(Action<Team> t)
+        {
+            if (this.teamGrid.SelectedRows.Count == 1 && this.teamGrid.SelectedRows[0].Tag is Team team)
+            {
+                t(team);
+                return;
+            }
+
+            MessageBox.Show("need select 1 team pls");
+        }
+
+        private void EditTEam_Click(object sender, System.EventArgs e)
+        {
+            WithSelected(x =>
+            {
+                if (new AddEditTeam(x.Id).ShowDialog() == DialogResult.OK)
+                {
+                    LoadTeams();
+                    DisplayTeams();
+                }
+            });
+        }
+
+        private void DeleteTeam_Click(object sender, System.EventArgs e)
+        {
+            WithSelected(x =>
+            {
+                data.Teams.Remove(x);
+                data.SaveChanges();
+                LoadTeams();
+                DisplayTeams();
+            });
         }
     }
 }
