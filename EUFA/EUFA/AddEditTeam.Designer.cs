@@ -38,10 +38,10 @@
             this.flagPicture = new System.Windows.Forms.PictureBox();
             this.btSelectFlag = new System.Windows.Forms.Button();
             this.cbPlayers = new System.Windows.Forms.GroupBox();
-            this.listPlayers = new System.Windows.Forms.ListView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.listPlayers = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -138,6 +138,36 @@
             this.cbPlayers.TabStop = false;
             this.cbPlayers.Text = "Players";
             // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.Location = new System.Drawing.Point(843, 92);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(158, 40);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "Edit";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(840, 138);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(158, 40);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Delete";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(843, 46);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(158, 40);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Add";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // listPlayers
             // 
             this.listPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -154,36 +184,6 @@
             this.listPlayers.TabIndex = 0;
             this.listPlayers.UseCompatibleStateImageBehavior = false;
             this.listPlayers.View = System.Windows.Forms.View.Details;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(843, 46);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(158, 40);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(840, 138);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(158, 40);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(843, 92);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(158, 40);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Edit";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // columnHeader1
             // 
@@ -221,6 +221,7 @@
             this.btSave.TabIndex = 10;
             this.btSave.Text = "Save & Close";
             this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // AddEditTeam
             // 
