@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using EUFA.Properties;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Collections.Generic;
 
 namespace EUFA
 {
@@ -35,6 +36,7 @@ namespace EUFA
 
         public void LoadPlayers()
         {
+            cbPlayers.Text = $"Players ({this.team.Players.Count})";
             listPlayers.Items.Clear();
 
             this.team.Players.ToList().ForEach(x =>
@@ -42,6 +44,7 @@ namespace EUFA
                 var lvi = new ListViewItem(x.ShirtNumber.ToString());
                 lvi.SubItems.Add(Utils.FullName(x));
                 lvi.SubItems.Add(x.Position);
+                lvi.Tag = x;
                 listPlayers.Items.Add(lvi);
             });
         }
@@ -100,6 +103,61 @@ namespace EUFA
         private void btSave_Click(object sender, EventArgs e)
         {
             Save();
+        }
+
+        private void WithPlayer(Action<Player> action)
+        {
+            if (this.listPlayers.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("Need to select player");
+                return;
+            }
+
+            action(this.listPlayers.SelectedItems[0].Tag as Player);
+        }
+
+        private HashSet<int> ExistingShirts => new HashSet<int>(this.team.Players.Select(x => x.ShirtNumber));
+
+        private void EditPlayer_Click(object sender, EventArgs e)
+        {
+            WithPlayer(x =>
+            {
+                if (new AddEditPlayer(x, ExistingShirts).ShowDialog() == DialogResult.OK)
+                {
+
+                }
+            });
+        }
+
+        private void DeletePlayer_Click(object sender, EventArgs e)
+        {
+            WithPlayer(x =>
+            {
+                if (MessageBox.Show("Delete?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (this.team.Id < 0)
+                    {
+                        this.team.Players.Remove(x);
+                        return;
+                    }
+
+                    this.data.Players.Remove(x);
+                    this.team.Players.Remove(x);
+                    this.data.SaveChanges();
+                }
+            });
+        }
+
+        private void AddPlayer_Click(object sender, EventArgs e)
+        {
+            var player = new Player
+            {
+                TeamId = this.team.Id > 0 ? this.team.Id : default
+            };
+            if (new AddEditPlayer(player, ExistingShirts).ShowDialog() == DialogResult.OK)
+            {
+                this.team.Players.Add(player);
+            }
         }
     }
 }

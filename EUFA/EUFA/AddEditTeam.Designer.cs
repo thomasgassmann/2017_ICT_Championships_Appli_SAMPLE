@@ -147,6 +147,7 @@
             this.button3.TabIndex = 3;
             this.button3.Text = "Edit";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.EditPlayer_Click);
             // 
             // button2
             // 
@@ -157,6 +158,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "Delete";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.DeletePlayer_Click);
             // 
             // button1
             // 
@@ -167,6 +169,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.AddPlayer_Click);
             // 
             // listPlayers
             // 
@@ -177,8 +180,10 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+            this.listPlayers.FullRowSelect = true;
             this.listPlayers.HideSelection = false;
             this.listPlayers.Location = new System.Drawing.Point(20, 46);
+            this.listPlayers.MultiSelect = false;
             this.listPlayers.Name = "listPlayers";
             this.listPlayers.Size = new System.Drawing.Size(814, 399);
             this.listPlayers.TabIndex = 0;
