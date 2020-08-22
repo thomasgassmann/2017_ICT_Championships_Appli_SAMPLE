@@ -22,16 +22,25 @@ namespace EUFA
             team = team ?? new Team
             {
                 Id = -1,
-                Players = new Player[0]
+                Players = new List<Player>()
             };
             InitializeComponent();
             LoadRegions();
             LoadPlayers();
+            SetButtonState();
+
+            if (teamId != null)
+            {
+                this.cbRegion.SelectedItem = this.cbRegion.Items.Cast<KeyWithView>().FirstOrDefault(x => (x.Key as Data.Region).Id == team.RegionId);
+                this.tbTeamName.Text = team.CountryName;
+                this.tbCountry.Text = team.CountryCode;
+                this.flagPicture.Image = team.FlagContent != null ? Image.FromStream(new MemoryStream(team.FlagContent)) : null;
+            }
         }
 
         public void SetButtonState()
         {
-            this.btSave.Enabled = (this.tbCountry.Text.Length != 3 || this.tbTeamName.Text.Length == 0);
+            this.btSave.Enabled = !(this.tbCountry.Text.Length != 3 || this.tbTeamName.Text.Length == 0 || this.cbRegion.SelectedItem == null);
         }
 
         public void LoadPlayers()
@@ -81,13 +90,16 @@ namespace EUFA
 
         public void Save()
         {
-            if (this.team.FlagContent == null)
+            this.team.CountryName = this.tbTeamName.Text;
+            this.team.CountryCode = this.tbCountry.Text;
+            this.team.RegionId = ((this.cbRegion.SelectedItem as KeyWithView)?.Key as Data.Region)?.Id ?? 0;
+
+
+            using (var memoryStream = new MemoryStream())
             {
-                using (var memoryStream = new MemoryStream())
-                {
-                    Resources.DefaultFlag.Save(memoryStream, ImageFormat.Png);
-                    this.team.FlagContent = memoryStream.ToArray();
-                }
+                var flag = this.flagPicture.Image ?? Resources.DefaultFlag;
+                flag.Save(memoryStream, ImageFormat.Png);
+                this.team.FlagContent = memoryStream.ToArray();
             }
 
             if (team.Id < 0)
@@ -124,7 +136,7 @@ namespace EUFA
             {
                 if (new AddEditPlayer(x, ExistingShirts).ShowDialog() == DialogResult.OK)
                 {
-
+                    LoadPlayers();
                 }
             });
         }
@@ -138,12 +150,14 @@ namespace EUFA
                     if (this.team.Id < 0)
                     {
                         this.team.Players.Remove(x);
+                        LoadPlayers();
                         return;
                     }
 
                     this.data.Players.Remove(x);
                     this.team.Players.Remove(x);
                     this.data.SaveChanges();
+                    LoadPlayers();
                 }
             });
         }
@@ -152,12 +166,19 @@ namespace EUFA
         {
             var player = new Player
             {
-                TeamId = this.team.Id > 0 ? this.team.Id : default
+                TeamId = this.team.Id > 0 ? this.team.Id : default,
+                DateOfBirth = DateTime.Today
             };
             if (new AddEditPlayer(player, ExistingShirts).ShowDialog() == DialogResult.OK)
             {
                 this.team.Players.Add(player);
+                LoadPlayers();
             }
+        }
+
+        private void cbRegion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.SetButtonState();
         }
     }
 }

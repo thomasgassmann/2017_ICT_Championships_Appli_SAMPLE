@@ -90,6 +90,7 @@
             this.button3.TabIndex = 5;
             this.button3.Text = "Delete";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.DeleteTeam_Click);
             // 
             // btClose
             // 
@@ -121,6 +122,7 @@
             this.teamGrid.RowHeadersVisible = false;
             this.teamGrid.RowHeadersWidth = 82;
             this.teamGrid.RowTemplate.Height = 33;
+            this.teamGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.teamGrid.ShowEditingIcon = false;
             this.teamGrid.Size = new System.Drawing.Size(1128, 663);
             this.teamGrid.TabIndex = 7;

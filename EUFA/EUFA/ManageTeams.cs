@@ -11,7 +11,6 @@ namespace EUFA
 {
     public partial class ManageTeams : Form
     {
-        private EUFAEntities data = new EUFAEntities();
         private List<Team> teams = new List<Team>();
         private List<Team> filteredTeams = new List<Team>();
 
@@ -24,7 +23,7 @@ namespace EUFA
 
         private void LoadTeams()
         {
-            teams = data.Teams.OrderBy(x => x.CountryName).ToList();
+            teams = new EUFAEntities().Teams.OrderBy(x => x.CountryName).ToList();
             filteredTeams = teams;
         }
 
@@ -87,7 +86,9 @@ namespace EUFA
         {
             WithSelected(x =>
             {
-                data.Teams.Remove(x);
+                var data = new EUFAEntities();
+                var res = data.Teams.Find(x.Id);
+                data.Teams.Remove(res);
                 data.SaveChanges();
                 LoadTeams();
                 DisplayTeams();

@@ -15,6 +15,13 @@ namespace EUFA
             ExistingShirts = existingShirts;
             this.player = player;
             InitializeComponent();
+            ValidateButtons();
+
+            this.tbFirstName.Text = player.FirstName;
+            this.tbLastName.Text = player.LastName;
+            this.cbPosition.SelectedItem = player.Position;
+            this.numShirtNumber.Value = player.ShirtNumber;
+            this.dateBirth.Value = player.DateOfBirth;
         }
 
         private void Position_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -62,7 +69,7 @@ namespace EUFA
 
             this.player.DateOfBirth = this.dateBirth.Value;
             this.player.ShirtNumber = (int)this.numShirtNumber.Value;
-            this.player.Position = (string)this.cbPosition.SelectedValue;
+            this.player.Position = (string)this.cbPosition.SelectedItem;
             this.player.LastName = this.tbLastName.Text;
             this.player.FirstName = this.tbFirstName.Text;
         }

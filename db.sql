@@ -46,7 +46,7 @@ create table Player(
 	Position varchar(50) not null,
 	ShirtNumber integer not null,
 	DateOfBirth datetime not null,
-	TeamId integer foreign key references Team(Id)
+	TeamId integer foreign key references Team(Id) on delete cascade
 );
 go
 create table [Match](

@@ -103,12 +103,14 @@
             this.cbRegion.Name = "cbRegion";
             this.cbRegion.Size = new System.Drawing.Size(199, 33);
             this.cbRegion.TabIndex = 5;
+            this.cbRegion.SelectedIndexChanged += new System.EventHandler(this.cbRegion_SelectedIndexChanged);
             // 
             // flagPicture
             // 
             this.flagPicture.Location = new System.Drawing.Point(876, 39);
             this.flagPicture.Name = "flagPicture";
             this.flagPicture.Size = new System.Drawing.Size(112, 95);
+            this.flagPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.flagPicture.TabIndex = 6;
             this.flagPicture.TabStop = false;
             // 
