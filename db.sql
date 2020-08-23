@@ -1,4 +1,5 @@
 drop database if exists ictskills;
+
 go
 create database ictskills;
 go
