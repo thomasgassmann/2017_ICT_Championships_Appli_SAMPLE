@@ -1,5 +1,6 @@
 ﻿using EUFA.Data;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -10,6 +11,7 @@ namespace EUFA
         private readonly EUFAEntities data = new EUFAEntities();
         private int? regionId = null;
         private Tournament tournament;
+        private List<int> selectedTeams;
 
         public AddEditTournament(Tournament t)
         {
@@ -18,6 +20,7 @@ namespace EUFA
             Init(t);
 
             ValidateForm();
+            SetParticipantCount();
         }
 
         private void Init(Tournament t)
@@ -26,12 +29,15 @@ namespace EUFA
             {
                 dateStart.Value = DateTime.Now.Date;
                 dateEnd.Value = DateTime.Now.Date.AddMonths(1);
+                selectedTeams = new List<int>();
+                LoadTeams();
                 return;
             }
 
             this.tbTournamentName.Text = t.Name;
             dateStart.Value = t.StartDate;
             dateEnd.Value = t.EndDate;
+            selectedTeams = t.TournamentParticipations.Select(x => x.TeamId).ToList();
             LoadTeams();
 
             this.listTeams.Items.Cast<ListViewItem>()
@@ -43,7 +49,7 @@ namespace EUFA
         private void ValidateForm()
         {
             var valid = tbTournamentName.Text.Length > 0 &&
-                        dateStart.Value >= dateEnd.Value;
+                        dateEnd.Value >= dateStart.Value;
 
             btSaveClose.Enabled = valid;
         }
@@ -59,14 +65,26 @@ namespace EUFA
 
         private void LoadTeams()
         {
+            listTeams.HideSelection = false;
             var teams = (regionId == null ? data.Teams : data.Teams.Where(x => x.RegionId == regionId)).ToList();
             listTeams.Items.Clear();
             teams.ForEach(x =>
             {
                 var lvi = new ListViewItem(x.CountryName);
                 lvi.Tag = x;
-                listTeams.Items.Add(lvi);
+                var c = listTeams.Items.Add(lvi);
             });
+            listTeams.Select();
+
+            var items = listTeams.Items.Cast<ListViewItem>().Where(p => selectedTeams.Contains(((Team)p.Tag).Id));
+            foreach (var item in items)
+            {
+                listTeams.FocusedItem = listTeams.Items[item.Index];
+                listTeams.Items[item.Index].Checked = true;
+                listTeams.Items[item.Index].Selected = true;
+                listTeams.Select();
+                listTeams.EnsureVisible(item.Index);
+            }
 
             SetParticipantCount();
         }
@@ -79,8 +97,7 @@ namespace EUFA
 
         private void SetParticipantCount()
         {
-            var count = this.listTeams.SelectedItems?.Count ?? 0;
-            this.lbParticipantCount.Text = $"({count}/24 selected)";
+            this.lbParticipantCount.Text = $"({this.selectedTeams.Count}/24 selected)";
         }
 
         private void listTeams_SelectedIndexChanged(object sender, EventArgs e)
@@ -90,17 +107,17 @@ namespace EUFA
 
         private void btSaveClose_Click(object sender, EventArgs e)
         {
-            if (this.listTeams.SelectedItems.Count != 24)
+            if (this.listTeams.CheckedItems.Count != 24)
             {
                 DialogResult = DialogResult.None;
                 MessageBox.Show("Erorr: Need 24");
                 return;
             }
 
-            var participations = this.listTeams.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag).Cast<Team>()
+            var participations = selectedTeams
                         .Select(x => new TournamentParticipation
                         {
-                            TeamId = x.Id
+                            TeamId = x
                         }).ToList();
             if (tournament == null)
             {
@@ -111,7 +128,7 @@ namespace EUFA
                     EndDate = this.dateEnd.Value,
                     TournamentParticipations = participations
                 });
-                data.SaveChanges();
+                data.TrySave();
             }
             else
             {
@@ -119,7 +136,7 @@ namespace EUFA
                 t.Name = this.tbTournamentName.Text;
                 t.StartDate = this.dateStart.Value;
                 t.EndDate = this.dateEnd.Value;
-                data.SaveChanges();
+                data.TrySave();
 
                 // TODO: horrible
                 var existingPart = data.TournamentParticipations.Where(x => x.TournamentId == tournament.Id).ToList();
@@ -128,7 +145,7 @@ namespace EUFA
                     existingPart[i].TeamId = participations[i].TeamId;
                 }
 
-                data.SaveChanges();
+                data.TrySave();
             }
         }
 
@@ -138,6 +155,44 @@ namespace EUFA
             {
                 e.Cancel = true;
             }
+        }
+
+        private void listTeams_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            SetParticipantCount();
+        }
+
+        private void listTeams_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            var item = (Team)this.listTeams.Items[e.Index].Tag;
+            if (e.NewValue == CheckState.Checked && !selectedTeams.Contains(item.Id))
+            {
+                selectedTeams.Add(item.Id);
+            }
+            else if (e.NewValue == CheckState.Unchecked)
+            {
+                selectedTeams.Remove(item.Id);
+            }
+        }
+
+        private void listTeams_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            SetParticipantCount();
+        }
+
+        private void tbTournamentName_TextChanged(object sender, EventArgs e)
+        {
+            ValidateForm();
+        }
+
+        private void dateStart_ValueChanged(object sender, EventArgs e)
+        {
+            ValidateForm();
+        }
+
+        private void dateEnd_ValueChanged(object sender, EventArgs e)
+        {
+            ValidateForm();
         }
     }
 }

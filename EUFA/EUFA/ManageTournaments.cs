@@ -7,8 +7,6 @@ namespace EUFA
 {
     public partial class ManageTournaments : Form
     {
-        private readonly EUFAEntities _entities = new EUFAEntities();
-
         public ManageTournaments()
         {
             InitializeComponent();
@@ -18,7 +16,7 @@ namespace EUFA
         private void LoadTournaments()
         {
             lvTournaments.Items.Clear();
-            _entities.Tournaments.ToList().ForEach(x =>
+            new EUFAEntities().Tournaments.ToList().ForEach(x =>
             {
                 var lvi = new ListViewItem(x.Id.ToString());
                 lvi.SubItems.Add(x.Name.ToString());
@@ -32,6 +30,7 @@ namespace EUFA
         private void Add_Click(object sender, System.EventArgs e)
         {
             new AddEditTournament(null).ShowDialog();
+            LoadTournaments();
         }
 
         private void Edit_Click(object sender, System.EventArgs e)
@@ -39,6 +38,7 @@ namespace EUFA
             ExecuteWithSelected(t =>
             {
                 new AddEditTournament(t).ShowDialog();
+                LoadTournaments();
             });
         }
 
@@ -48,8 +48,10 @@ namespace EUFA
             {
                 if (MessageBox.Show("Delete?", "Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    _entities.Tournaments.Remove(t);
-                    _entities.SaveChanges();
+                    var data = new EUFAEntities();
+                    var item = data.Tournaments.Find(t.Id);
+                    data.Tournaments.Remove(item);
+                    data.TrySave();
 
                     this.LoadTournaments();
                 }

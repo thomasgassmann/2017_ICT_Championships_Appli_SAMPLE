@@ -59,6 +59,7 @@
             this.tbTournamentName.Name = "tbTournamentName";
             this.tbTournamentName.Size = new System.Drawing.Size(240, 31);
             this.tbTournamentName.TabIndex = 1;
+            this.tbTournamentName.TextChanged += new System.EventHandler(this.tbTournamentName_TextChanged);
             // 
             // label2
             // 
@@ -86,6 +87,7 @@
             this.dateStart.Name = "dateStart";
             this.dateStart.Size = new System.Drawing.Size(200, 31);
             this.dateStart.TabIndex = 6;
+            this.dateStart.ValueChanged += new System.EventHandler(this.dateStart_ValueChanged);
             // 
             // dateEnd
             // 
@@ -95,6 +97,7 @@
             this.dateEnd.Name = "dateEnd";
             this.dateEnd.Size = new System.Drawing.Size(200, 31);
             this.dateEnd.TabIndex = 7;
+            this.dateEnd.ValueChanged += new System.EventHandler(this.dateEnd_ValueChanged);
             // 
             // listTeams
             // 
@@ -113,6 +116,9 @@
             this.listTeams.TabIndex = 8;
             this.listTeams.UseCompatibleStateImageBehavior = false;
             this.listTeams.View = System.Windows.Forms.View.Details;
+            this.listTeams.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listTeams_ItemCheck);
+            this.listTeams.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listTeams_ItemChecked);
+            this.listTeams.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listTeams_ItemSelectionChanged);
             this.listTeams.SelectedIndexChanged += new System.EventHandler(this.listTeams_SelectedIndexChanged);
             // 
             // columnHeader1

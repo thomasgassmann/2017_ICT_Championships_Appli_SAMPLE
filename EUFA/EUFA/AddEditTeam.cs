@@ -105,11 +105,11 @@ namespace EUFA
             if (team.Id < 0)
             {
                 data.Teams.Add(this.team);
-                data.SaveChanges();
+                data.TrySave();
                 return;
             }
 
-            data.SaveChanges();
+            data.TrySave();
         }
 
         private void btSave_Click(object sender, EventArgs e)
@@ -156,7 +156,7 @@ namespace EUFA
 
                     this.data.Players.Remove(x);
                     this.team.Players.Remove(x);
-                    this.data.SaveChanges();
+                    this.data.TrySave();
                     LoadPlayers();
                 }
             });

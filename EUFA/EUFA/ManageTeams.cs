@@ -89,7 +89,7 @@ namespace EUFA
                 var data = new EUFAEntities();
                 var res = data.Teams.Find(x.Id);
                 data.Teams.Remove(res);
-                data.SaveChanges();
+                data.TrySave();
                 LoadTeams();
                 DisplayTeams();
             });
