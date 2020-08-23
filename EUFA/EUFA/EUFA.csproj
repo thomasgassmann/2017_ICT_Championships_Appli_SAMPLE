@@ -73,8 +73,20 @@
     <Compile Include="AddEditTournament.Designer.cs">
       <DependentUpon>AddEditTournament.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllocateTeamsToGroups.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllocateTeamsToGroups.Designer.cs">
+      <DependentUpon>AllocateTeamsToGroups.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DateOnlyPicker.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Group.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Group.Designer.cs">
+      <DependentUpon>Group.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\RegionFilter.cs">
       <SubType>UserControl</SubType>
@@ -159,6 +171,12 @@
     <EmbeddedResource Include="AddEditTournament.resx">
       <DependentUpon>AddEditTournament.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllocateTeamsToGroups.resx">
+      <DependentUpon>AllocateTeamsToGroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Group.resx">
+      <DependentUpon>Group.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\RegionFilter.resx">
       <DependentUpon>RegionFilter.cs</DependentUpon>

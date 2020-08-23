@@ -17,9 +17,14 @@ namespace EUFA
             InitializeComponent();
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void Close_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btAllocate_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
