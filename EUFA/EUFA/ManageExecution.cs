@@ -12,9 +12,12 @@ namespace EUFA
 {
     public partial class ManageExecution : Form
     {
-        public ManageExecution()
+        private readonly int tournamentId;
+
+        public ManageExecution(int tournamentId)
         {
             InitializeComponent();
+            this.tournamentId = tournamentId;
         }
 
         private void Close_Click(object sender, EventArgs e)
@@ -24,7 +27,7 @@ namespace EUFA
 
         private void btAllocate_Click(object sender, EventArgs e)
         {
-
+            new AllocateTeamsToGroups(this.tournamentId).ShowDialog();
         }
     }
 }
