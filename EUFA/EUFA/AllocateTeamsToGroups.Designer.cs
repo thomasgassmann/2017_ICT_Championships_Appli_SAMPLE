@@ -33,12 +33,12 @@
             this.btClose = new System.Windows.Forms.Button();
             this.listTeams = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupA = new EUFA.Controls.Group();
-            this.groupB = new EUFA.Controls.Group();
-            this.groupC = new EUFA.Controls.Group();
-            this.groupF = new EUFA.Controls.Group();
-            this.groupE = new EUFA.Controls.Group();
             this.groupD = new EUFA.Controls.Group();
+            this.groupE = new EUFA.Controls.Group();
+            this.groupF = new EUFA.Controls.Group();
+            this.groupC = new EUFA.Controls.Group();
+            this.groupB = new EUFA.Controls.Group();
+            this.groupA = new EUFA.Controls.Group();
             this.SuspendLayout();
             // 
             // btAllocateRandomly
@@ -49,6 +49,7 @@
             this.btAllocateRandomly.TabIndex = 0;
             this.btAllocateRandomly.Text = "Allocate randomly";
             this.btAllocateRandomly.UseVisualStyleBackColor = true;
+            this.btAllocateRandomly.Click += new System.EventHandler(this.btAllocateRandomly_Click);
             // 
             // btSave
             // 
@@ -94,65 +95,65 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Teams";
             // 
-            // groupA
+            // groupD
             // 
-            this.groupA.AllowDrop = true;
-            this.groupA.GroupLetter = "Group A";
-            this.groupA.Location = new System.Drawing.Point(12, 128);
-            this.groupA.Name = "groupA";
-            this.groupA.Size = new System.Drawing.Size(482, 401);
-            this.groupA.TabIndex = 5;
-            this.groupA.Teams = null;
-            // 
-            // groupB
-            // 
-            this.groupB.AllowDrop = true;
-            this.groupB.GroupLetter = "Group B";
-            this.groupB.Location = new System.Drawing.Point(500, 128);
-            this.groupB.Name = "groupB";
-            this.groupB.Size = new System.Drawing.Size(482, 401);
-            this.groupB.TabIndex = 6;
-            this.groupB.Teams = null;
-            // 
-            // groupC
-            // 
-            this.groupC.AllowDrop = true;
-            this.groupC.GroupLetter = "Group C";
-            this.groupC.Location = new System.Drawing.Point(988, 128);
-            this.groupC.Name = "groupC";
-            this.groupC.Size = new System.Drawing.Size(482, 401);
-            this.groupC.TabIndex = 7;
-            this.groupC.Teams = null;
-            // 
-            // groupF
-            // 
-            this.groupF.AllowDrop = true;
-            this.groupF.GroupLetter = "Group F";
-            this.groupF.Location = new System.Drawing.Point(988, 535);
-            this.groupF.Name = "groupF";
-            this.groupF.Size = new System.Drawing.Size(482, 401);
-            this.groupF.TabIndex = 8;
-            this.groupF.Teams = null;
+            this.groupD.AllowDrop = true;
+            this.groupD.GroupLetter = "C";
+            this.groupD.Location = new System.Drawing.Point(12, 535);
+            this.groupD.Name = "groupD";
+            this.groupD.Size = new System.Drawing.Size(482, 401);
+            this.groupD.TabIndex = 10;
+            this.groupD.Teams = null;
             // 
             // groupE
             // 
             this.groupE.AllowDrop = true;
-            this.groupE.GroupLetter = "Group E";
+            this.groupE.GroupLetter = "E";
             this.groupE.Location = new System.Drawing.Point(500, 535);
             this.groupE.Name = "groupE";
             this.groupE.Size = new System.Drawing.Size(482, 401);
             this.groupE.TabIndex = 9;
             this.groupE.Teams = null;
             // 
-            // groupD
+            // groupF
             // 
-            this.groupD.AllowDrop = true;
-            this.groupD.GroupLetter = "Group C";
-            this.groupD.Location = new System.Drawing.Point(12, 535);
-            this.groupD.Name = "groupD";
-            this.groupD.Size = new System.Drawing.Size(482, 401);
-            this.groupD.TabIndex = 10;
-            this.groupD.Teams = null;
+            this.groupF.AllowDrop = true;
+            this.groupF.GroupLetter = "F";
+            this.groupF.Location = new System.Drawing.Point(988, 535);
+            this.groupF.Name = "groupF";
+            this.groupF.Size = new System.Drawing.Size(482, 401);
+            this.groupF.TabIndex = 8;
+            this.groupF.Teams = null;
+            // 
+            // groupC
+            // 
+            this.groupC.AllowDrop = true;
+            this.groupC.GroupLetter = "C";
+            this.groupC.Location = new System.Drawing.Point(988, 128);
+            this.groupC.Name = "groupC";
+            this.groupC.Size = new System.Drawing.Size(482, 401);
+            this.groupC.TabIndex = 7;
+            this.groupC.Teams = null;
+            // 
+            // groupB
+            // 
+            this.groupB.AllowDrop = true;
+            this.groupB.GroupLetter = "B";
+            this.groupB.Location = new System.Drawing.Point(500, 128);
+            this.groupB.Name = "groupB";
+            this.groupB.Size = new System.Drawing.Size(482, 401);
+            this.groupB.TabIndex = 6;
+            this.groupB.Teams = null;
+            // 
+            // groupA
+            // 
+            this.groupA.AllowDrop = true;
+            this.groupA.GroupLetter = "A";
+            this.groupA.Location = new System.Drawing.Point(12, 128);
+            this.groupA.Name = "groupA";
+            this.groupA.Size = new System.Drawing.Size(482, 401);
+            this.groupA.TabIndex = 5;
+            this.groupA.Teams = null;
             // 
             // AllocateTeamsToGroups
             // 

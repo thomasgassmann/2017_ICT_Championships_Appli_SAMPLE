@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace EUFA.Controls
@@ -11,6 +12,8 @@ namespace EUFA.Controls
         {
             InitializeComponent();
         }
+
+        public event EventHandler OnDropTeam;
 
         [Description("GroupName"), Category("Data")]
         public string GroupName
@@ -53,6 +56,12 @@ namespace EUFA.Controls
             {
                 Team = t;
             }
+            else
+            {
+                Team = null;
+            }
+
+            this.OnDropTeam(this, new EventArgs());
         }
 
         private void mainPanel_DragEnter(object sender, DragEventArgs e)
