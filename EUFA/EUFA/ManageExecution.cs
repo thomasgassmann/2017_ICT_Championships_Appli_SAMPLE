@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EUFA.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,15 @@ namespace EUFA
         {
             InitializeComponent();
             this.tournamentId = tournamentId;
+            LoadDidAlloc();
+        }
+
+        private void LoadDidAlloc()
+        {
+            var didAlloc = new EUFAEntities().TournamentParticipations.Where(x => x.TournamentId == tournamentId)
+                .All(x => x.GroupLetter != null && x.GroupNumber != null);
+            lbTeamsAllocated.Text = didAlloc ? "Yes" : "No";
+            btAllocate.Enabled = !didAlloc;
         }
 
         private void Close_Click(object sender, EventArgs e)
@@ -28,6 +38,7 @@ namespace EUFA
         private void btAllocate_Click(object sender, EventArgs e)
         {
             new AllocateTeamsToGroups(this.tournamentId).ShowDialog();
+            LoadDidAlloc();
         }
     }
 }

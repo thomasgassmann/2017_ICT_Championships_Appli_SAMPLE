@@ -88,6 +88,7 @@
     <Compile Include="Controls\Group.Designer.cs">
       <DependentUpon>Group.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MoveItem.cs" />
     <Compile Include="Controls\RegionFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -181,6 +182,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllocateTeamsToGroups.resx">
       <DependentUpon>AllocateTeamsToGroups.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Group.resx">
       <DependentUpon>Group.cs</DependentUpon>

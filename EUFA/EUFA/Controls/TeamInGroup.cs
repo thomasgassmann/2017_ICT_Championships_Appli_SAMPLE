@@ -1,5 +1,8 @@
-﻿namespace EUFA.Controls
+﻿using System;
+
+namespace EUFA.Controls
 {
+    [Serializable]
     public class TeamInGroup
     {
         public int Id { get; set; }

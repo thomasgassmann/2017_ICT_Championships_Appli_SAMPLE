@@ -32,7 +32,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbTeamsAllocated = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
@@ -86,15 +86,15 @@
             this.button4.Text = "Manage Quarter-Final Games";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // lbTeamsAllocated
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(418, 74);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 20);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "label1";
+            this.lbTeamsAllocated.AutoSize = true;
+            this.lbTeamsAllocated.Location = new System.Drawing.Point(418, 74);
+            this.lbTeamsAllocated.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbTeamsAllocated.Name = "lbTeamsAllocated";
+            this.lbTeamsAllocated.Size = new System.Drawing.Size(51, 20);
+            this.lbTeamsAllocated.TabIndex = 4;
+            this.lbTeamsAllocated.Text = "label1";
             // 
             // label2
             // 
@@ -212,7 +212,7 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbTeamsAllocated);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -231,7 +231,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbTeamsAllocated;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button5;

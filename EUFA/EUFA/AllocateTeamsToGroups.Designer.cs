@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AllocateTeamsToGroups));
             this.btAllocateRandomly = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
             this.btClose = new System.Windows.Forms.Button();
@@ -61,6 +62,7 @@
             this.btSave.TabIndex = 1;
             this.btSave.Text = "Save & close";
             this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // btClose
             // 
@@ -103,7 +105,7 @@
             this.groupD.Name = "groupD";
             this.groupD.Size = new System.Drawing.Size(482, 401);
             this.groupD.TabIndex = 10;
-            this.groupD.Teams = null;
+            this.groupD.Teams = ((System.Collections.Generic.IList<EUFA.Controls.TeamInGroup>)(resources.GetObject("groupD.Teams")));
             // 
             // groupE
             // 
@@ -113,7 +115,7 @@
             this.groupE.Name = "groupE";
             this.groupE.Size = new System.Drawing.Size(482, 401);
             this.groupE.TabIndex = 9;
-            this.groupE.Teams = null;
+            this.groupE.Teams = ((System.Collections.Generic.IList<EUFA.Controls.TeamInGroup>)(resources.GetObject("groupE.Teams")));
             // 
             // groupF
             // 
@@ -123,7 +125,7 @@
             this.groupF.Name = "groupF";
             this.groupF.Size = new System.Drawing.Size(482, 401);
             this.groupF.TabIndex = 8;
-            this.groupF.Teams = null;
+            this.groupF.Teams = ((System.Collections.Generic.IList<EUFA.Controls.TeamInGroup>)(resources.GetObject("groupF.Teams")));
             // 
             // groupC
             // 
@@ -133,7 +135,7 @@
             this.groupC.Name = "groupC";
             this.groupC.Size = new System.Drawing.Size(482, 401);
             this.groupC.TabIndex = 7;
-            this.groupC.Teams = null;
+            this.groupC.Teams = ((System.Collections.Generic.IList<EUFA.Controls.TeamInGroup>)(resources.GetObject("groupC.Teams")));
             // 
             // groupB
             // 
@@ -143,7 +145,7 @@
             this.groupB.Name = "groupB";
             this.groupB.Size = new System.Drawing.Size(482, 401);
             this.groupB.TabIndex = 6;
-            this.groupB.Teams = null;
+            this.groupB.Teams = ((System.Collections.Generic.IList<EUFA.Controls.TeamInGroup>)(resources.GetObject("groupB.Teams")));
             // 
             // groupA
             // 
@@ -153,7 +155,7 @@
             this.groupA.Name = "groupA";
             this.groupA.Size = new System.Drawing.Size(482, 401);
             this.groupA.TabIndex = 5;
-            this.groupA.Teams = null;
+            this.groupA.Teams = ((System.Collections.Generic.IList<EUFA.Controls.TeamInGroup>)(resources.GetObject("groupA.Teams")));
             // 
             // AllocateTeamsToGroups
             // 
@@ -175,6 +177,7 @@
             this.Controls.Add(this.btAllocateRandomly);
             this.Name = "AllocateTeamsToGroups";
             this.Text = "AllocateTeamsToGroups";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AllocateTeamsToGroups_FormClosing);
             this.Load += new System.EventHandler(this.AllocateTeamsToGroups_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
