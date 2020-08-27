@@ -16,7 +16,7 @@ namespace EUFA.Data
     public partial class EUFAEntities : DbContext
     {
         public EUFAEntities()
-            : base("name=EUFAEntities")
+            : base("name=Entities")
         {
         }
     

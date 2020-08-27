@@ -25,6 +25,7 @@ namespace EUFA.Data
         public string StageCode { get; set; }
         public int TeamA { get; set; }
         public int TeamB { get; set; }
+        public Nullable<bool> Finished { get; set; }
     
         public virtual TournamentParticipation TournamentParticipation { get; set; }
         public virtual TournamentParticipation TournamentParticipation1 { get; set; }

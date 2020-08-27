@@ -88,6 +88,18 @@
     <Compile Include="Controls\Group.Designer.cs">
       <DependentUpon>Group.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MatchItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MatchItem.Designer.cs">
+      <DependentUpon>MatchItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MatchList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MatchList.Designer.cs">
+      <DependentUpon>MatchList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MoveItem.cs" />
     <Compile Include="Controls\RegionFilter.cs">
       <SubType>UserControl</SubType>
@@ -102,44 +114,44 @@
     <Compile Include="Controls\TeamItem.Designer.cs">
       <DependentUpon>TeamItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\EUFAModel.Context.cs">
+    <Compile Include="Data\EUFA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EUFAModel.Context.tt</DependentUpon>
+      <DependentUpon>EUFA.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\EUFAModel.cs">
+    <Compile Include="Data\EUFA.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EUFAModel.tt</DependentUpon>
+      <DependentUpon>EUFA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\EUFAModel.Designer.cs">
+    <Compile Include="Data\EUFA.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EUFAModel.edmx</DependentUpon>
+      <DependentUpon>EUFA.edmx</DependentUpon>
     </Compile>
     <Compile Include="Data\Match.cs">
-      <DependentUpon>EUFAModel.tt</DependentUpon>
+      <DependentUpon>EUFA.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\MatchEvent.cs">
-      <DependentUpon>EUFAModel.tt</DependentUpon>
+      <DependentUpon>EUFA.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\MatchParticipation.cs">
-      <DependentUpon>EUFAModel.tt</DependentUpon>
+      <DependentUpon>EUFA.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Player.cs">
-      <DependentUpon>EUFAModel.tt</DependentUpon>
+      <DependentUpon>EUFA.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Region.cs">
-      <DependentUpon>EUFAModel.tt</DependentUpon>
+      <DependentUpon>EUFA.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Team.cs">
-      <DependentUpon>EUFAModel.tt</DependentUpon>
+      <DependentUpon>EUFA.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Tournament.cs">
-      <DependentUpon>EUFAModel.tt</DependentUpon>
+      <DependentUpon>EUFA.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\TournamentParticipation.cs">
-      <DependentUpon>EUFAModel.tt</DependentUpon>
+      <DependentUpon>EUFA.tt</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="KeyWithView.cs" />
@@ -155,6 +167,12 @@
     <Compile Include="ManageExecution.Designer.cs">
       <DependentUpon>ManageExecution.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManageGames.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageGames.Designer.cs">
+      <DependentUpon>ManageGames.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManageTeams.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +187,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stage.cs" />
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="AddEditPlayer.resx">
       <DependentUpon>AddEditPlayer.cs</DependentUpon>
@@ -187,6 +206,9 @@
     <EmbeddedResource Include="Controls\Group.resx">
       <DependentUpon>Group.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MatchList.resx">
+      <DependentUpon>MatchList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\RegionFilter.resx">
       <DependentUpon>RegionFilter.cs</DependentUpon>
     </EmbeddedResource>
@@ -198,6 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ManageExecution.resx">
       <DependentUpon>ManageExecution.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageGames.resx">
+      <DependentUpon>ManageGames.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageTeams.resx">
       <DependentUpon>ManageTeams.cs</DependentUpon>
@@ -215,12 +240,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EntityDeploy Include="Data\EUFAModel.edmx">
+    <EntityDeploy Include="Data\EUFA.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EUFAModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>EUFA.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Data\EUFAModel.edmx.diagram">
-      <DependentUpon>EUFAModel.edmx</DependentUpon>
+    <None Include="Data\EUFA.edmx.diagram">
+      <DependentUpon>EUFA.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -237,21 +262,23 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\EUFAModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EUFAModel.Context.cs</LastGenOutput>
-      <DependentUpon>EUFAModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Data\EUFAModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EUFAModel.edmx</DependentUpon>
-      <LastGenOutput>EUFAModel.cs</LastGenOutput>
-    </Content>
     <None Include="Resources\Download.png" />
     <None Include="Resources\DefaultFlag.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\EUFA.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EUFA.edmx</DependentUpon>
+      <LastGenOutput>EUFA.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\EUFA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EUFA.edmx</DependentUpon>
+      <LastGenOutput>EUFA.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
