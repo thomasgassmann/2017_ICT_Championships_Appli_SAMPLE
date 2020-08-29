@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Net.Http.Headers;
+using System.Security.Cryptography.X509Certificates;
 
 namespace EUFA
 {
@@ -73,12 +76,30 @@ namespace EUFA
             var matches = new List<Match>();
             var random = new Random();
 
-            void add(int a, int b) => matches.Add(new Match
+            void add(int a, int b, string tag = null) => matches.Add(new Match
             {
                 TeamA = a,
                 TeamB = b,
-                StageCode = stage
-            }));
+                StageCode = stage,
+                Tag = tag
+            });
+
+            Func<string, int> getWinnerFn(string tagStart)
+            {
+                var m = data.Matches
+                    .Include(x => x.MatchEvents)
+                    .Where(x => x.Tag.Length == 3).ToList()
+                    .Where(x => x.Tag.StartsWith(tagStart))
+                    .ToList();
+
+                int WinnerOf(string s)
+                {
+                    var cur = m.First(x => x.Tag == s);
+                    return MatchResultCalc.Winner(cur, cur.MatchEvents);
+                }
+
+                return WinnerOf;
+            }
 
             switch (stage)
             {
@@ -164,18 +185,18 @@ namespace EUFA
                         { "ABCD", new[] { "C", "D", "A", "B" } },
                         { "ABCE", new[] { "C", "A", "B", "E" } },
                         { "ABCF", new[] { "C", "A", "B", "F" } },
-                        {"ABDE", new[]{"D"," A","B","E" } },
-                        {"ABDF", new[]{"D"," A","B","F"}},
-                        {"ABEF", new[]{"E"," A","B","F"}},
-                        {"ACDE", new[]{"C"," D","A","E"}},
-                        {"ACDF", new[]{"C"," D","A","F"}},
-                        {"ACEF", new[]{"C"," A","F","E"}},
-                        {"ADEF", new[]{"D"," A","F","E"}},
-                        {"BCDE", new[]{"C"," D","B","E"}},
-                        {"BCDF", new[]{"C"," D","B","F"}},
-                        {"BCEF", new[]{"E"," C","B","F"}},
-                        {"BDEF", new[]{"E"," D","B","F"}},
-                        {"CDEF", new[]{"C"," D","F","E"}}
+                        {"ABDE", new[]{"D","A","B","E" } },
+                        {"ABDF", new[]{"D","A","B","F"}},
+                        {"ABEF", new[]{"E","A","B","F"}},
+                        {"ACDE", new[]{"C","D","A","E"}},
+                        {"ACDF", new[]{"C","D","A","F"}},
+                        {"ACEF", new[]{"C","A","F","E"}},
+                        {"ADEF", new[]{"D","A","F","E"}},
+                        {"BCDE", new[]{"C","D","B","E"}},
+                        {"BCDF", new[]{"C","D","B","F"}},
+                        {"BCEF", new[]{"E","C","B","F"}},
+                        {"BDEF", new[]{"E","D","B","F"}},
+                        {"CDEF", new[]{"C","D","F","E"}}
                     };
 
                     var thirdRankedInOrder = thirdRanked
@@ -191,14 +212,30 @@ namespace EUFA
                         return third[key][index];
                     }
 
-                    add(dict["A"][1], dict["C"][1]);
-                    add(dict["B"][0], dict[DetermineThirdGroup(1)][2]);
-                    add(dict["D"][0], dict[DetermineThirdGroup(3)][2]);
-                    add(dict["A"][0], dict[DetermineThirdGroup(0)][2]);
-                    add(dict["C"][0], dict[DetermineThirdGroup(2)][2]);
-                    add(dict["F"][0], dict["E"][1]);
-                    add(dict["E"][0], dict["D"][1]);
-                    add(dict["B"][1], dict["F"][1]);
+                    add(dict["A"][1], dict["C"][1], "AF1");
+                    add(dict["B"][0], dict[DetermineThirdGroup(1)][2], "AF2");
+                    add(dict["D"][0], dict[DetermineThirdGroup(3)][2], "AF3");
+                    add(dict["A"][0], dict[DetermineThirdGroup(0)][2], "AF4");
+                    add(dict["C"][0], dict[DetermineThirdGroup(2)][2], "AF5");
+                    add(dict["F"][0], dict["E"][1], "AF6");
+                    add(dict["E"][0], dict["D"][1], "AF7");
+                    add(dict["B"][1], dict["F"][1], "AF8");
+                    break;
+                case Stage.QuarterFinal:
+                    var qfWin = getWinnerFn("AF");
+                    add(qfWin("AF1"), qfWin("AF3"), "QF1");
+                    add(qfWin("AF2"), qfWin("AF6"), "QF2");
+                    add(qfWin("AF5"), qfWin("AF7"), "QF3");
+                    add(qfWin("AF4"), qfWin("AF8"), "QF4");
+                    break;
+                case Stage.SemiFinal:
+                    var smWin = getWinnerFn("QF");
+                    add(smWin("QF1"), smWin("QF2"), "SF1");
+                    add(smWin("QF2"), smWin("QF4"), "SF2");
+                    break;
+                case Stage.Final:
+                    var fWin = getWinnerFn("SF");
+                    add(fWin("SF1"), fWin("SF2"), "TF1");
                     break;
                 default:
                     throw new Exception();

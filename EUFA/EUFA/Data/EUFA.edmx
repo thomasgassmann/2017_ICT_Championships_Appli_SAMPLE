@@ -15,6 +15,7 @@
           <Property Name="TeamB" Type="int" Nullable="false" />
           <Property Name="Finished" Type="bit" Nullable="false" />
           <Property Name="Started" Type="bit" Nullable="false" />
+          <Property Name="Tag" Type="varchar" MaxLength="3" />
         </EntityType>
         <EntityType Name="MatchEvents">
           <Key>
@@ -257,6 +258,7 @@
           <Property Name="TeamB" Type="Int32" Nullable="false" />
           <Property Name="Finished" Type="Boolean" Nullable="false" />
           <Property Name="Started" Type="Boolean" Nullable="false" />
+          <Property Name="Tag" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TournamentParticipation" Relationship="Self.FK__Match__TeamA__34C8D9D1" FromRole="Match" ToRole="TournamentParticipation" />
           <NavigationProperty Name="TournamentParticipation1" Relationship="Self.FK__Match__TeamB__35BCFE0A" FromRole="Match" ToRole="TournamentParticipation" />
           <NavigationProperty Name="MatchEvents" Relationship="Self.FK__MatchEven__Match__3E52440B" FromRole="Match" ToRole="MatchEvents" />
@@ -517,6 +519,7 @@
                 <ScalarProperty Name="TeamB" ColumnName="TeamB" />
                 <ScalarProperty Name="Finished" ColumnName="Finished" />
                 <ScalarProperty Name="Started" ColumnName="Started" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

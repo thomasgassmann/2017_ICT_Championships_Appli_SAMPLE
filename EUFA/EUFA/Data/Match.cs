@@ -27,6 +27,7 @@ namespace EUFA.Data
         public int TeamB { get; set; }
         public bool Finished { get; set; }
         public bool Started { get; set; }
+        public string Tag { get; set; }
     
         public virtual TournamentParticipation TournamentParticipation { get; set; }
         public virtual TournamentParticipation TournamentParticipation1 { get; set; }

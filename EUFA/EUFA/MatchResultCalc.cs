@@ -1,6 +1,7 @@
 ﻿using EUFA.Data;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -27,6 +28,12 @@ namespace EUFA
 
             var goals = $"{TeamACount}:{TeamBCount}";
             return IsInProgress ? goals + "*" : goals;
+        }
+
+        public static int Winner(Match match, IEnumerable<MatchEvent> results)
+        {
+            var res = MatchResultCalc.FromEvents(match, results);
+            return res.TeamACount > res.TeamBCount ? match.TeamA : match.TeamB;
         }
 
         public static MatchResultCalc FromEvents(Match match, IEnumerable<MatchEvent> events)
