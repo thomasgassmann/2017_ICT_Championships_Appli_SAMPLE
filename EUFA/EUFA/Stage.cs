@@ -47,66 +47,165 @@ namespace EUFA
             var items = new EUFAEntities().Matches.Include(x => x.TournamentParticipation)
                 .Where(x => x.TournamentParticipation.TournamentId == tournamentId)
                 .Where(x => x.StageCode == stage)
-                .Where(x => x.Finished.Value)
+                .Where(x => x.Finished)
                 .Count();
             return items == GamesInStage(stage);
+        }
+
+        private class Ranking
+        {
+            public int TeamId { get; set; }
+
+            public int GoalsScored { get; set; }
+
+            public int Random { get; set; }
+
+            public int GoalsDifference { get; set; }
+
+            public int MatchesWon { get; set; }
+
+            public string Group { get; set; }
         }
 
         public static void Init(int tournamentId, string stage)
         {
             var data = new EUFAEntities();
+            var matches = new List<Match>();
+            var random = new Random();
+
+            void add(int a, int b) => matches.Add(new Match
+            {
+                TeamA = a,
+                TeamB = b,
+                StageCode = stage
+            }));
+
             switch (stage)
             {
                 case Stage.Group:
                     var parts = data.TournamentParticipations.Where(x => x.TournamentId == tournamentId).ToList();
                     var byGroup = parts.GroupBy(x => x.GroupLetter);
-                    var matches = new List<Match>();
                     foreach (var group in byGroup)
                     {
-                        matches.Add(new Match
-                        {
-                            TeamA = group.First(x => x.GroupNumber == 1).Id,
-                            TeamB = group.First(x => x.GroupNumber == 2).Id,
-                            StageCode = Stage.Group
-                        });
-                        matches.Add(new Match
-                        {
-                            TeamA = group.First(x => x.GroupNumber == 1).Id,
-                            TeamB = group.First(x => x.GroupNumber == 3).Id,
-                            StageCode = Stage.Group
-                        });
-                        matches.Add(new Match
-                        {
-                            TeamA = group.First(x => x.GroupNumber == 3).Id,
-                            TeamB = group.First(x => x.GroupNumber == 4).Id,
-                            StageCode = Stage.Group
-                        });
-                        matches.Add(new Match
-                        {
-                            TeamA = group.First(x => x.GroupNumber == 4).Id,
-                            TeamB = group.First(x => x.GroupNumber == 1).Id,
-                            StageCode = Stage.Group
-                        });
-                        matches.Add(new Match
-                        {
-                            TeamA = group.First(x => x.GroupNumber == 2).Id,
-                            TeamB = group.First(x => x.GroupNumber == 4).Id,
-                            StageCode = Stage.Group
-                        });
-                        matches.Add(new Match
-                        {
-                            TeamA = group.First(x => x.GroupNumber == 2).Id,
-                            TeamB = group.First(x => x.GroupNumber == 3).Id,
-                            StageCode = Stage.Group
-                        });
+                        add(group.First(x => x.GroupNumber == 1).Id, group.First(x => x.GroupNumber == 2).Id);
+                        add(group.First(x => x.GroupNumber == 1).Id, group.First(x => x.GroupNumber == 3).Id);
+                        add(group.First(x => x.GroupNumber == 3).Id, group.First(x => x.GroupNumber == 4).Id);
+                        add(group.First(x => x.GroupNumber == 4).Id, group.First(x => x.GroupNumber == 1).Id);
+                        add(group.First(x => x.GroupNumber == 2).Id, group.First(x => x.GroupNumber == 4).Id);
+                        add(group.First(x => x.GroupNumber == 2).Id, group.First(x => x.GroupNumber == 3).Id);
                     }
 
-                    data.Matches.AddRange(matches);
-                    data.TrySave();
-                    return;
+                    break;
+                case Stage.RoundOf16:
+                    var groupMatches = data.Matches.Where(x => x.TournamentParticipation.TournamentId == tournamentId)
+                        .Where(x => x.StageCode == Stage.Group)
+                        .Include(x => x.MatchEvents)
+                        .Include(x => x.TournamentParticipation)
+                        .Include(x => x.TournamentParticipation1)
+                        .ToList()
+                        .Select(x => new
+                        {
+                            TeamAId = x.TeamA,
+                            TeamBId = x.TeamB,
+                            Group = x.TournamentParticipation.GroupLetter,
+                            TeamAScore = MatchResultCalc.FromEvents(x, x.MatchEvents).TeamACount,
+                            TeamBScore = MatchResultCalc.FromEvents(x, x.MatchEvents).TeamBCount
+                        }).ToList();
+                    var dict = new Dictionary<string, IList<int>>();
+                    var thirdRanked = new List<Ranking>();
+                    foreach (var group in groupMatches.GroupBy(x => x.Group))
+                    {
+                        int MatchesWon(int teamId)
+                        {
+                            var aWon = group.Where(x => x.TeamAId == teamId && x.TeamAScore > x.TeamBScore);
+                            var bWon = group.Where(x => x.TeamBId == teamId && x.TeamBScore > x.TeamAScore);
+                            return aWon.Concat(bWon).Distinct().Count();
+                        }
+
+                        int GoalsScored(int teamId)
+                        {
+                            var aScored = group.Where(x => x.TeamAId == teamId).Sum(x => x.TeamAScore);
+                            var bScored = group.Where(x => x.TeamBId == teamId).Sum(x => x.TeamBScore);
+                            return aScored + bScored;
+                        }
+
+                        int GoalsDifference(int teamId)
+                        {
+                            var aScored = group.Where(x => x.TeamAId == teamId).Sum(x => x.TeamAScore - x.TeamBScore);
+                            var bScored = group.Where(x => x.TeamBId == teamId).Sum(x => x.TeamBScore - x.TeamAScore);
+                            return aScored + bScored;
+                        }
+
+                        var teamsInGroup = group.Select(x => x.TeamAId).Concat(group.Select(x => x.TeamBId)).Distinct().ToList();
+
+                        var rankedTeams = teamsInGroup
+                            .Select(x => new Ranking
+                            {
+                                TeamId = x,
+                                MatchesWon = MatchesWon(x),
+                                GoalsDifference = GoalsDifference(x),
+                                GoalsScored = GoalsScored(x),
+                                Random = random.Next(),
+                                Group = group.Key
+                            })
+                            .OrderByDescending(x => x.MatchesWon)
+                            .ThenByDescending(x => x.GoalsDifference)
+                            .ThenByDescending(x => x.GoalsScored)
+                            .ThenBy(x => x.Random)
+                            .ToList();
+
+                        thirdRanked.Add(rankedTeams[2]);
+
+                        dict.Add(group.Key, rankedTeams.Select(x => x.TeamId).ToList());
+                    }
+
+                    var third = new Dictionary<string, string[]>
+                    {
+                        { "ABCD", new[] { "C", "D", "A", "B" } },
+                        { "ABCE", new[] { "C", "A", "B", "E" } },
+                        { "ABCF", new[] { "C", "A", "B", "F" } },
+                        {"ABDE", new[]{"D"," A","B","E" } },
+                        {"ABDF", new[]{"D"," A","B","F"}},
+                        {"ABEF", new[]{"E"," A","B","F"}},
+                        {"ACDE", new[]{"C"," D","A","E"}},
+                        {"ACDF", new[]{"C"," D","A","F"}},
+                        {"ACEF", new[]{"C"," A","F","E"}},
+                        {"ADEF", new[]{"D"," A","F","E"}},
+                        {"BCDE", new[]{"C"," D","B","E"}},
+                        {"BCDF", new[]{"C"," D","B","F"}},
+                        {"BCEF", new[]{"E"," C","B","F"}},
+                        {"BDEF", new[]{"E"," D","B","F"}},
+                        {"CDEF", new[]{"C"," D","F","E"}}
+                    };
+
+                    var thirdRankedInOrder = thirdRanked
+                        .OrderByDescending(x => x.MatchesWon)
+                        .ThenByDescending(x => x.GoalsDifference)
+                        .ThenByDescending(x => x.GoalsScored)
+                        .Take(4)
+                        .ToList();
+                    var key = string.Join(string.Empty, thirdRankedInOrder.Select(x => x.Group).ToList());
+
+                    string DetermineThirdGroup(int index)
+                    {
+                        return third[key][index];
+                    }
+
+                    add(dict["A"][1], dict["C"][1]);
+                    add(dict["B"][0], dict[DetermineThirdGroup(1)][2]);
+                    add(dict["D"][0], dict[DetermineThirdGroup(3)][2]);
+                    add(dict["A"][0], dict[DetermineThirdGroup(0)][2]);
+                    add(dict["C"][0], dict[DetermineThirdGroup(2)][2]);
+                    add(dict["F"][0], dict["E"][1]);
+                    add(dict["E"][0], dict["D"][1]);
+                    add(dict["B"][1], dict["F"][1]);
+                    break;
                 default:
                     throw new Exception();
             }
+
+            data.Matches.AddRange(matches);
+            data.TrySave();
         }
 
         public static bool StageInitialized(int tournamentId, string stage)

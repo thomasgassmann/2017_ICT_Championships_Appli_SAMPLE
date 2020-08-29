@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="EUFAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Match">
           <Key>
             <PropertyRef Name="Id" />
@@ -13,7 +13,8 @@
           <Property Name="StageCode" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="TeamA" Type="int" Nullable="false" />
           <Property Name="TeamB" Type="int" Nullable="false" />
-          <Property Name="Finished" Type="bit" />
+          <Property Name="Finished" Type="bit" Nullable="false" />
+          <Property Name="Started" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="MatchEvents">
           <Key>
@@ -107,7 +108,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MatchEven__Match__3D5E1FD2">
+        <Association Name="FK__MatchEven__Match__3E52440B">
           <End Role="Match" Type="Self.Match" Multiplicity="1" />
           <End Role="MatchEvents" Type="Self.MatchEvents" Multiplicity="*" />
           <ReferentialConstraint>
@@ -119,7 +120,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MatchPart__Match__3A81B327">
+        <Association Name="FK__MatchPart__Match__3B75D760">
           <End Role="Match" Type="Self.Match" Multiplicity="1" />
           <End Role="MatchParticipation" Type="Self.MatchParticipation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -131,7 +132,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MatchPart__Playe__398D8EEE">
+        <Association Name="FK__MatchPart__Playe__3A81B327">
           <End Role="Player" Type="Self.Player" Multiplicity="1" />
           <End Role="MatchParticipation" Type="Self.MatchParticipation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -195,7 +196,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DataStoreContainer">
+        <EntityContainer Name="EUFAModelStoreContainer">
           <EntitySet Name="Match" EntityType="Self.Match" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MatchEvents" EntityType="Self.MatchEvents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MatchParticipation" EntityType="Self.MatchParticipation" Schema="dbo" store:Type="Tables" />
@@ -212,15 +213,15 @@
             <End Role="TournamentParticipation" EntitySet="TournamentParticipation" />
             <End Role="Match" EntitySet="Match" />
           </AssociationSet>
-          <AssociationSet Name="FK__MatchEven__Match__3D5E1FD2" Association="Self.FK__MatchEven__Match__3D5E1FD2">
+          <AssociationSet Name="FK__MatchEven__Match__3E52440B" Association="Self.FK__MatchEven__Match__3E52440B">
             <End Role="Match" EntitySet="Match" />
             <End Role="MatchEvents" EntitySet="MatchEvents" />
           </AssociationSet>
-          <AssociationSet Name="FK__MatchPart__Match__3A81B327" Association="Self.FK__MatchPart__Match__3A81B327">
+          <AssociationSet Name="FK__MatchPart__Match__3B75D760" Association="Self.FK__MatchPart__Match__3B75D760">
             <End Role="Match" EntitySet="Match" />
             <End Role="MatchParticipation" EntitySet="MatchParticipation" />
           </AssociationSet>
-          <AssociationSet Name="FK__MatchPart__Playe__398D8EEE" Association="Self.FK__MatchPart__Playe__398D8EEE">
+          <AssociationSet Name="FK__MatchPart__Playe__3A81B327" Association="Self.FK__MatchPart__Playe__3A81B327">
             <End Role="Player" EntitySet="Player" />
             <End Role="MatchParticipation" EntitySet="MatchParticipation" />
           </AssociationSet>
@@ -245,7 +246,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="EUFAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Match">
           <Key>
             <PropertyRef Name="Id" />
@@ -254,11 +255,12 @@
           <Property Name="StageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TeamA" Type="Int32" Nullable="false" />
           <Property Name="TeamB" Type="Int32" Nullable="false" />
-          <Property Name="Finished" Type="Boolean" />
+          <Property Name="Finished" Type="Boolean" Nullable="false" />
+          <Property Name="Started" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TournamentParticipation" Relationship="Self.FK__Match__TeamA__34C8D9D1" FromRole="Match" ToRole="TournamentParticipation" />
           <NavigationProperty Name="TournamentParticipation1" Relationship="Self.FK__Match__TeamB__35BCFE0A" FromRole="Match" ToRole="TournamentParticipation" />
-          <NavigationProperty Name="MatchEvents" Relationship="Self.FK__MatchEven__Match__3D5E1FD2" FromRole="Match" ToRole="MatchEvents" />
-          <NavigationProperty Name="MatchParticipations" Relationship="Self.FK__MatchPart__Match__3A81B327" FromRole="Match" ToRole="MatchParticipation" />
+          <NavigationProperty Name="MatchEvents" Relationship="Self.FK__MatchEven__Match__3E52440B" FromRole="Match" ToRole="MatchEvents" />
+          <NavigationProperty Name="MatchParticipations" Relationship="Self.FK__MatchPart__Match__3B75D760" FromRole="Match" ToRole="MatchParticipation" />
         </EntityType>
         <EntityType Name="MatchEvent">
           <Key>
@@ -270,7 +272,7 @@
           <Property Name="TeamA" Type="Boolean" Nullable="false" />
           <Property Name="EventType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AdditionalInformation" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Match" Relationship="Self.FK__MatchEven__Match__3D5E1FD2" FromRole="MatchEvents" ToRole="Match" />
+          <NavigationProperty Name="Match" Relationship="Self.FK__MatchEven__Match__3E52440B" FromRole="MatchEvents" ToRole="Match" />
         </EntityType>
         <EntityType Name="MatchParticipation">
           <Key>
@@ -280,8 +282,8 @@
           <Property Name="PlayerId" Type="Int32" Nullable="false" />
           <Property Name="MatchId" Type="Int32" Nullable="false" />
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Match" Relationship="Self.FK__MatchPart__Match__3A81B327" FromRole="MatchParticipation" ToRole="Match" />
-          <NavigationProperty Name="Player" Relationship="Self.FK__MatchPart__Playe__398D8EEE" FromRole="MatchParticipation" ToRole="Player" />
+          <NavigationProperty Name="Match" Relationship="Self.FK__MatchPart__Match__3B75D760" FromRole="MatchParticipation" ToRole="Match" />
+          <NavigationProperty Name="Player" Relationship="Self.FK__MatchPart__Playe__3A81B327" FromRole="MatchParticipation" ToRole="Player" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -294,7 +296,7 @@
           <Property Name="ShirtNumber" Type="Int32" Nullable="false" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TeamId" Type="Int32" />
-          <NavigationProperty Name="MatchParticipations" Relationship="Self.FK__MatchPart__Playe__398D8EEE" FromRole="Player" ToRole="MatchParticipation" />
+          <NavigationProperty Name="MatchParticipations" Relationship="Self.FK__MatchPart__Playe__3A81B327" FromRole="Player" ToRole="MatchParticipation" />
           <NavigationProperty Name="Team" Relationship="Self.FK__Player__TeamId__31EC6D26" FromRole="Player" ToRole="Team" />
         </EntityType>
         <EntityType Name="Region">
@@ -366,7 +368,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MatchEven__Match__3D5E1FD2">
+        <Association Name="FK__MatchEven__Match__3E52440B">
           <End Role="Match" Type="Self.Match" Multiplicity="1" />
           <End Role="MatchEvents" Type="Self.MatchEvent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -378,7 +380,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MatchPart__Match__3A81B327">
+        <Association Name="FK__MatchPart__Match__3B75D760">
           <End Role="Match" Type="Self.Match" Multiplicity="1" />
           <End Role="MatchParticipation" Type="Self.MatchParticipation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -390,7 +392,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MatchPart__Playe__398D8EEE">
+        <Association Name="FK__MatchPart__Playe__3A81B327">
           <End Role="Player" Type="Self.Player" Multiplicity="1" />
           <End Role="MatchParticipation" Type="Self.MatchParticipation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -454,7 +456,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="EUFAEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Matches" EntityType="Self.Match" />
           <EntitySet Name="MatchEvents" EntityType="Self.MatchEvent" />
           <EntitySet Name="MatchParticipations" EntityType="Self.MatchParticipation" />
@@ -471,15 +473,15 @@
             <End Role="TournamentParticipation" EntitySet="TournamentParticipations" />
             <End Role="Match" EntitySet="Matches" />
           </AssociationSet>
-          <AssociationSet Name="FK__MatchEven__Match__3D5E1FD2" Association="Self.FK__MatchEven__Match__3D5E1FD2">
+          <AssociationSet Name="FK__MatchEven__Match__3E52440B" Association="Self.FK__MatchEven__Match__3E52440B">
             <End Role="Match" EntitySet="Matches" />
             <End Role="MatchEvents" EntitySet="MatchEvents" />
           </AssociationSet>
-          <AssociationSet Name="FK__MatchPart__Match__3A81B327" Association="Self.FK__MatchPart__Match__3A81B327">
+          <AssociationSet Name="FK__MatchPart__Match__3B75D760" Association="Self.FK__MatchPart__Match__3B75D760">
             <End Role="Match" EntitySet="Matches" />
             <End Role="MatchParticipation" EntitySet="MatchParticipations" />
           </AssociationSet>
-          <AssociationSet Name="FK__MatchPart__Playe__398D8EEE" Association="Self.FK__MatchPart__Playe__398D8EEE">
+          <AssociationSet Name="FK__MatchPart__Playe__3A81B327" Association="Self.FK__MatchPart__Playe__3A81B327">
             <End Role="Player" EntitySet="Players" />
             <End Role="MatchParticipation" EntitySet="MatchParticipations" />
           </AssociationSet>
@@ -505,20 +507,21 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DataStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="EUFAModelStoreContainer" CdmEntityContainer="EUFAEntities">
           <EntitySetMapping Name="Matches">
-            <EntityTypeMapping TypeName="Data.Match">
+            <EntityTypeMapping TypeName="EUFAModel.Match">
               <MappingFragment StoreEntitySet="Match">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StageCode" ColumnName="StageCode" />
                 <ScalarProperty Name="TeamA" ColumnName="TeamA" />
                 <ScalarProperty Name="TeamB" ColumnName="TeamB" />
                 <ScalarProperty Name="Finished" ColumnName="Finished" />
+                <ScalarProperty Name="Started" ColumnName="Started" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MatchEvents">
-            <EntityTypeMapping TypeName="Data.MatchEvent">
+            <EntityTypeMapping TypeName="EUFAModel.MatchEvent">
               <MappingFragment StoreEntitySet="MatchEvents">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="MatchId" ColumnName="MatchId" />
@@ -530,7 +533,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MatchParticipations">
-            <EntityTypeMapping TypeName="Data.MatchParticipation">
+            <EntityTypeMapping TypeName="EUFAModel.MatchParticipation">
               <MappingFragment StoreEntitySet="MatchParticipation">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
@@ -540,7 +543,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Players">
-            <EntityTypeMapping TypeName="Data.Player">
+            <EntityTypeMapping TypeName="EUFAModel.Player">
               <MappingFragment StoreEntitySet="Player">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -553,7 +556,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Regions">
-            <EntityTypeMapping TypeName="Data.Region">
+            <EntityTypeMapping TypeName="EUFAModel.Region">
               <MappingFragment StoreEntitySet="Region">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="RegionName" ColumnName="RegionName" />
@@ -561,7 +564,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Teams">
-            <EntityTypeMapping TypeName="Data.Team">
+            <EntityTypeMapping TypeName="EUFAModel.Team">
               <MappingFragment StoreEntitySet="Team">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
@@ -572,7 +575,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tournaments">
-            <EntityTypeMapping TypeName="Data.Tournament">
+            <EntityTypeMapping TypeName="EUFAModel.Tournament">
               <MappingFragment StoreEntitySet="Tournament">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -582,7 +585,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TournamentParticipations">
-            <EntityTypeMapping TypeName="Data.TournamentParticipation">
+            <EntityTypeMapping TypeName="EUFAModel.TournamentParticipation">
               <MappingFragment StoreEntitySet="TournamentParticipation">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TeamId" ColumnName="TeamId" />

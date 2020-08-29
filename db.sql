@@ -55,7 +55,8 @@ create table [Match](
 	StageCode varchar(3) not null,
 	TeamA integer not null foreign key references TournamentParticipation(Id),
 	TeamB integer not null foreign key references TournamentParticipation(Id),
-	Finished bit default(0)
+	Finished bit not null default(0),
+	Started bit not null default(0)
 );
 go
 create table MatchParticipation(

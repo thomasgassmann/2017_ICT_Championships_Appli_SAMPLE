@@ -185,6 +185,7 @@
     <Compile Include="ManageTournaments.Designer.cs">
       <DependentUpon>ManageTournaments.cs</DependentUpon>
     </Compile>
+    <Compile Include="MatchEventCode.cs" />
     <Compile Include="MatchResultCalc.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

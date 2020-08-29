@@ -4,24 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c60dbcb952694214abd4bb729a42ae64" Name="Diagram1">
-        <EntityTypeShape EntityType="Data.Match" Width="1.5" PointX="7.5" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data.MatchEvent" Width="1.5" PointX="9.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data.MatchParticipation" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data.Player" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data.Region" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data.Team" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data.Tournament" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data.TournamentParticipation" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="Data.FK__Match__TeamA__34C8D9D1" ManuallyRouted="false" />
-        <AssociationConnector Association="Data.FK__Match__TeamB__35BCFE0A" ManuallyRouted="false" />
-        <AssociationConnector Association="Data.FK__MatchEven__Match__3D5E1FD2" ManuallyRouted="false" />
-        <AssociationConnector Association="Data.FK__MatchPart__Match__3A81B327" ManuallyRouted="false" />
-        <AssociationConnector Association="Data.FK__MatchPart__Playe__398D8EEE" ManuallyRouted="false" />
-        <AssociationConnector Association="Data.FK__Player__TeamId__31EC6D26" ManuallyRouted="false" />
-        <AssociationConnector Association="Data.FK__Team__RegionId__2A4B4B5E" ManuallyRouted="false" />
-        <AssociationConnector Association="Data.FK__Tournamen__TeamI__2E1BDC42" ManuallyRouted="false" />
-        <AssociationConnector Association="Data.FK__Tournamen__Tourn__2F10007B" ManuallyRouted="false" />
+      <Diagram DiagramId="888a78d65875492aa4b74b576c3cfd66" Name="Diagram1">
+        <EntityTypeShape EntityType="EUFAModel.Match" Width="1.5" PointX="7.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EUFAModel.MatchEvent" Width="1.5" PointX="9.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EUFAModel.MatchParticipation" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EUFAModel.Player" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EUFAModel.Region" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EUFAModel.Team" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EUFAModel.Tournament" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EUFAModel.TournamentParticipation" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="EUFAModel.FK__Match__TeamA__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="EUFAModel.FK__Match__TeamB__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="EUFAModel.FK__MatchEven__Match__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="EUFAModel.FK__MatchPart__Match__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="EUFAModel.FK__MatchPart__Playe__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="EUFAModel.FK__Player__TeamId__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="EUFAModel.FK__Team__RegionId__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="EUFAModel.FK__Tournamen__TeamI__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="EUFAModel.FK__Tournamen__Tourn__2F10007B" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

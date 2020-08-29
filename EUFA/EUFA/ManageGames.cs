@@ -79,7 +79,7 @@ namespace EUFA
 
         private void btSave_Click(object sender, System.EventArgs e)
         {
-            if (!_allMatches.All(x => x.Finished.HasValue && x.Finished.Value))
+            if (!_allMatches.All(x => x.Finished))
             {
                 MessageBox.Show("Not all games are finished");
                 DialogResult = DialogResult.None;
