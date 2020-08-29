@@ -1,11 +1,5 @@
-﻿using System;
+﻿using EUFA.Data;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EUFA.Controls
@@ -15,6 +9,21 @@ namespace EUFA.Controls
         public MatchList()
         {
             InitializeComponent();
+        }
+
+        public List<Match> Matches
+        {
+            set
+            {
+                stackPanel.Controls.Clear();
+                foreach (var match in value)
+                {
+                    stackPanel.Controls.Add(new MatchItem
+                    {
+                        Match = match
+                    });
+                }
+            }
         }
     }
 }
