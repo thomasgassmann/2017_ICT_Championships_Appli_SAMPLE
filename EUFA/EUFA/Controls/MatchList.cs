@@ -6,9 +6,19 @@ namespace EUFA.Controls
 {
     public partial class MatchList : UserControl
     {
+        private bool canEdit = true;
+
         public MatchList()
         {
             InitializeComponent();
+        }
+
+        public bool CanEdit
+        {
+            set
+            {
+                canEdit = value;
+            }
         }
 
         public List<Match> Matches
@@ -20,7 +30,8 @@ namespace EUFA.Controls
                 {
                     stackPanel.Controls.Add(new MatchItem
                     {
-                        Match = match
+                        Match = match,
+                        CanEdit = canEdit
                     });
                 }
             }

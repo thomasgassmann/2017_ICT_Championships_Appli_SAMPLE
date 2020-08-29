@@ -1,23 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EUFA.Data;
+using System;
 using System.Windows.Forms;
-using EUFA.Data;
 
 namespace EUFA.Controls
 {
     public partial class MatchItem : UserControl
     {
         private Match _match;
+        private bool canEdit = true;
 
         public MatchItem()
         {
             InitializeComponent();
+        }
+
+        public bool CanEdit
+        {
+            set
+            {
+                canEdit = value;
+                this.btOpenEditMatch.Enabled = canEdit;
+            }
         }
 
         public Match Match

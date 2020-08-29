@@ -11,10 +11,14 @@ namespace EUFA
         private readonly string _stageCode;
         private List<Match> _allMatches;
         private List<Match> _shownMatches;
+        private readonly bool canEdit;
+        private readonly int _tournamentId;
 
-        public ManageGames(string stage)
+        public ManageGames(int tid, string stage)
         {
+            _tournamentId = tid;
             _stageCode = stage;
+            matchList.CanEdit = Stage.StageDone(_tournamentId, stage);
             InitializeComponent();
 
             var gameDescription = Stage.GetDescription(stage);
@@ -43,6 +47,8 @@ namespace EUFA
             var matches = new EUFAEntities().Matches.Where(x => x.StageCode == _stageCode)
                 .Include(x => x.TournamentParticipation.Team)
                 .Include(x => x.TournamentParticipation1.Team)
+                .Where(x => x.TournamentParticipation.TournamentId == _tournamentId)
+                .Where(x => x.TournamentParticipation1.TournamentId == _tournamentId)
                 .Include(x => x.MatchEvents)
                 .AsNoTracking()
                 .ToList();
@@ -69,6 +75,23 @@ namespace EUFA
         private void CbGroup_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             FilterGroups();
+        }
+
+        private void btSave_Click(object sender, System.EventArgs e)
+        {
+            if (!_allMatches.All(x => x.Finished.HasValue && x.Finished.Value))
+            {
+                MessageBox.Show("Not all games are finished");
+                DialogResult = DialogResult.None;
+            }
+        }
+
+        private void ManageGames_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (DialogResult == DialogResult.None)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

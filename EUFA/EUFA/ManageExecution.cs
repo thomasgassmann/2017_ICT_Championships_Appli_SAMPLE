@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace EUFA
@@ -73,7 +74,10 @@ namespace EUFA
                 return;
             }
 
-            new ManageGames(stage).ShowDialog();
+            if (new ManageGames(tournamentId, stage).ShowDialog() == DialogResult.OK)
+            {
+                TryInitStage();
+            }
         }
 
         private void Close_Click(object sender, EventArgs e)

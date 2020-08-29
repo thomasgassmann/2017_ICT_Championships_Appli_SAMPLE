@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.cbGroup = new System.Windows.Forms.ComboBox();
-            this.matchList = new EUFA.Controls.MatchList();
             this.btClose = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
+            this.matchList = new EUFA.Controls.MatchList();
             this.SuspendLayout();
             // 
             // cbGroup
@@ -42,16 +42,6 @@
             this.cbGroup.Name = "cbGroup";
             this.cbGroup.Size = new System.Drawing.Size(271, 28);
             this.cbGroup.TabIndex = 0;
-            // 
-            // matchList
-            // 
-            this.matchList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.matchList.Location = new System.Drawing.Point(12, 57);
-            this.matchList.Name = "matchList";
-            this.matchList.Size = new System.Drawing.Size(981, 602);
-            this.matchList.TabIndex = 1;
             // 
             // btClose
             // 
@@ -74,6 +64,17 @@
             this.btSave.TabIndex = 3;
             this.btSave.Text = "Finish";
             this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
+            // 
+            // matchList
+            // 
+            this.matchList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.matchList.Location = new System.Drawing.Point(12, 57);
+            this.matchList.Name = "matchList";
+            this.matchList.Size = new System.Drawing.Size(981, 602);
+            this.matchList.TabIndex = 1;
             // 
             // ManageGames
             // 
@@ -88,6 +89,7 @@
             this.Controls.Add(this.cbGroup);
             this.Name = "ManageGames";
             this.Text = "Manage Games";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ManageGames_FormClosing);
             this.ResumeLayout(false);
 
         }
