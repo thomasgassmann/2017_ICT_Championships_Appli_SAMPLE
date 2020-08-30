@@ -26,17 +26,18 @@ namespace EUFA
         {
             get
             {
-                var id = ((this.cbPlayers.SelectedItem as KeyWithView)?.Key as Player)?.Id;
-                if (this.cbPositions.SelectedItem == null || id == null)
+                var player = ((this.cbPlayers.SelectedItem as KeyWithView)?.Key as Player);
+                if (this.cbPositions.SelectedItem == null || player == null)
                 {
                     return null;
                 }
 
                 return new MatchParticipation
                 {
-                    PlayerId = id.Value,
+                    PlayerId = player.Id,
                     Position = this.cbPositions.SelectedItem as string,
-                    MatchId = _matchId
+                    MatchId = _matchId,
+                    Player = player
                 };
             }
         }
