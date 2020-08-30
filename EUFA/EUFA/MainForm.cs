@@ -62,5 +62,48 @@ namespace EUFA
                 selected = null;
             }
         }
+
+        private void generateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var data = new EUFAEntities();
+            var random = new Random();
+
+            var regions = data.Regions.ToList();
+
+            var teamIndex = 0;
+
+            string RandomString() => string.Join(string.Empty, Enumerable.Range(0, 10).Select(x => 'A' + random.Next(0, 26)).ToList());
+
+            Team GetTeam() => new Team
+            {
+                CountryCode = (teamIndex++).ToString("000"),
+                CountryName = RandomString(),
+                Players = Enumerable.Range(0, 24).Select(x => new Player
+                {
+                    DateOfBirth = new DateTime(random.Next(1960, 1980), 1, 1),
+                    FirstName = RandomString(),
+                    LastName = RandomString(),
+                    Position = PlayerPosition.All[random.Next(0, 4)],
+                    ShirtNumber = x
+                }).ToList(),
+                RegionId = regions[random.Next(0, regions.Count - 1)].Id
+            };
+
+            for (var i = 0; i < random.Next(1, 7); i++)
+            {
+                data.Tournaments.Add(new Tournament
+                {
+                    StartDate = new DateTime(random.Next(2000, 2015), 01, 01, 0, 0, 0, 0),
+                    EndDate = new DateTime(random.Next(2016, 2020), 01, 01, 0, 0, 0, 0),
+                    Name = RandomString(),
+                    TournamentParticipations = Enumerable.Range(0, 24).Select((x, p) => new TournamentParticipation
+                    {
+                        Team = GetTeam()
+                    }).ToList()
+                });
+            }
+
+            data.SaveChanges();
+        }
     }
 }
