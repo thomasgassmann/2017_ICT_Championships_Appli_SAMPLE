@@ -23,6 +23,8 @@ namespace EUFA.Controls
             }
         }
 
+        public event EventHandler OnDidEdit;
+
         public Match Match
         {
             set
@@ -35,7 +37,10 @@ namespace EUFA.Controls
 
         private void btOpenEditMatch_Click(object sender, EventArgs e)
         {
-
+            if (new EditGame(_match).ShowDialog() == DialogResult.OK)
+            {
+                OnDidEdit(this, new EventArgs());
+            }
         }
     }
 }

@@ -19,6 +19,7 @@ namespace EUFA
             _tournamentId = tid;
             _stageCode = stage;
             matchList.CanEdit = Stage.StageDone(_tournamentId, stage);
+            matchList.OnDidEdit += this.MatchList_OnDidEdit;
             InitializeComponent();
 
             var gameDescription = Stage.GetDescription(stage);
@@ -40,6 +41,11 @@ namespace EUFA
                 cbGroup.SelectedIndexChanged += this.CbGroup_SelectedIndexChanged;
                 cbGroup.SelectedIndex = 0;
             }
+        }
+
+        private void MatchList_OnDidEdit(object sender, System.EventArgs e)
+        {
+            LoadGames();
         }
 
         private void LoadGames()

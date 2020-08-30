@@ -1,4 +1,5 @@
 ﻿using EUFA.Data;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -12,6 +13,8 @@ namespace EUFA.Controls
         {
             InitializeComponent();
         }
+
+        public event EventHandler OnDidEdit;
 
         public bool CanEdit
         {
@@ -28,11 +31,13 @@ namespace EUFA.Controls
                 stackPanel.Controls.Clear();
                 foreach (var match in value)
                 {
-                    stackPanel.Controls.Add(new MatchItem
+                    var item = new MatchItem
                     {
                         Match = match,
                         CanEdit = canEdit
-                    });
+                    };
+                    item.OnDidEdit += this.OnDidEdit;
+                    stackPanel.Controls.Add(item);
                 }
             }
         }
