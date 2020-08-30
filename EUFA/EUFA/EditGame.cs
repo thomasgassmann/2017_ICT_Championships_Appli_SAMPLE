@@ -1,4 +1,7 @@
 ﻿using EUFA.Data;
+using System.Linq;
+using System.Data.Entity;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace EUFA
@@ -26,8 +29,17 @@ namespace EUFA
 
         public void LoadPlayerLists()
         {
+            var parts = new EUFAEntities().MatchParticipations
+                .AsNoTracking()
+                .Include(x => x.Player.Team)
+                .Where(x => x.MatchId == _match.Id)
+                .ToList();
+
             playerListTeamA.Team = _match.TournamentParticipation.Team;
             playerListTeamB.Team = _match.TournamentParticipation1.Team;
+
+            playerListTeamA.Participation = parts.Where(x => x.Player.Team.Id == _match.TournamentParticipation.TeamId).ToList();
+            playerListTeamB.Participation = parts.Where(x => x.Player.Team.Id == _match.TournamentParticipation1.TeamId).ToList();
 
             playerListTeamA.MatchId = _match.Id;
             playerListTeamB.MatchId = _match.Id;
@@ -37,6 +49,7 @@ namespace EUFA
         {
             if (playerListTeamA.Participation.Count != 11 || playerListTeamB.Participation.Count != 11)
             {
+                (sender as CheckBox).Checked = false;
                 MessageBox.Show("need 11 in both");
                 return;
             }

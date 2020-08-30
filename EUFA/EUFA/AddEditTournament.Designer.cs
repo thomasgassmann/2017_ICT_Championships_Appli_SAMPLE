@@ -47,35 +47,39 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 86);
+            this.label1.Location = new System.Drawing.Point(9, 69);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(189, 25);
+            this.label1.Size = new System.Drawing.Size(141, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Tournament Name";
             // 
             // tbTournamentName
             // 
-            this.tbTournamentName.Location = new System.Drawing.Point(415, 83);
+            this.tbTournamentName.Location = new System.Drawing.Point(311, 66);
+            this.tbTournamentName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbTournamentName.Name = "tbTournamentName";
-            this.tbTournamentName.Size = new System.Drawing.Size(240, 31);
+            this.tbTournamentName.Size = new System.Drawing.Size(181, 26);
             this.tbTournamentName.TabIndex = 1;
             this.tbTournamentName.TextChanged += new System.EventHandler(this.tbTournamentName_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 142);
+            this.label2.Location = new System.Drawing.Point(9, 114);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 25);
+            this.label2.Size = new System.Drawing.Size(83, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Start Date";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(639, 143);
+            this.label3.Location = new System.Drawing.Point(479, 114);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 25);
+            this.label3.Size = new System.Drawing.Size(77, 20);
             this.label3.TabIndex = 5;
             this.label3.Text = "End Date";
             // 
@@ -83,9 +87,10 @@
             // 
             this.dateStart.CustomFormat = "dd.MM.yy";
             this.dateStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateStart.Location = new System.Drawing.Point(415, 138);
+            this.dateStart.Location = new System.Drawing.Point(311, 110);
+            this.dateStart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateStart.Name = "dateStart";
-            this.dateStart.Size = new System.Drawing.Size(200, 31);
+            this.dateStart.Size = new System.Drawing.Size(151, 26);
             this.dateStart.TabIndex = 6;
             this.dateStart.ValueChanged += new System.EventHandler(this.dateStart_ValueChanged);
             // 
@@ -93,9 +98,10 @@
             // 
             this.dateEnd.CustomFormat = "dd.MM.yy";
             this.dateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateEnd.Location = new System.Drawing.Point(755, 137);
+            this.dateEnd.Location = new System.Drawing.Point(566, 110);
+            this.dateEnd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateEnd.Name = "dateEnd";
-            this.dateEnd.Size = new System.Drawing.Size(200, 31);
+            this.dateEnd.Size = new System.Drawing.Size(151, 26);
             this.dateEnd.TabIndex = 7;
             this.dateEnd.ValueChanged += new System.EventHandler(this.dateEnd_ValueChanged);
             // 
@@ -110,9 +116,10 @@
             this.columnHeader2});
             this.listTeams.FullRowSelect = true;
             this.listTeams.HideSelection = false;
-            this.listTeams.Location = new System.Drawing.Point(415, 200);
+            this.listTeams.Location = new System.Drawing.Point(311, 160);
+            this.listTeams.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listTeams.Name = "listTeams";
-            this.listTeams.Size = new System.Drawing.Size(693, 665);
+            this.listTeams.Size = new System.Drawing.Size(521, 533);
             this.listTeams.TabIndex = 8;
             this.listTeams.UseCompatibleStateImageBehavior = false;
             this.listTeams.View = System.Windows.Forms.View.Details;
@@ -134,35 +141,39 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 217);
+            this.label4.Location = new System.Drawing.Point(9, 174);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(202, 25);
+            this.label4.Size = new System.Drawing.Size(148, 20);
             this.label4.TabIndex = 9;
             this.label4.Text = "Participating Teams";
             // 
             // lbParticipantCount
             // 
             this.lbParticipantCount.AutoSize = true;
-            this.lbParticipantCount.Location = new System.Drawing.Point(12, 259);
+            this.lbParticipantCount.Location = new System.Drawing.Point(9, 207);
+            this.lbParticipantCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbParticipantCount.Name = "lbParticipantCount";
-            this.lbParticipantCount.Size = new System.Drawing.Size(70, 25);
+            this.lbParticipantCount.Size = new System.Drawing.Size(51, 20);
             this.lbParticipantCount.TabIndex = 10;
             this.lbParticipantCount.Text = "label5";
             // 
             // regionsFilter
             // 
-            this.regionsFilter.Location = new System.Drawing.Point(12, 324);
+            this.regionsFilter.Location = new System.Drawing.Point(9, 259);
+            this.regionsFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.regionsFilter.Name = "regionsFilter";
-            this.regionsFilter.Size = new System.Drawing.Size(384, 439);
+            this.regionsFilter.Size = new System.Drawing.Size(288, 351);
             this.regionsFilter.TabIndex = 11;
             this.regionsFilter.RegionChange += new System.EventHandler<EUFA.Controls.RegionChangedEventArgs>(this.regionsFilter_RegionChange);
             // 
             // btCancel
             // 
             this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btCancel.Location = new System.Drawing.Point(911, 907);
+            this.btCancel.Location = new System.Drawing.Point(683, 726);
+            this.btCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btCancel.Name = "btCancel";
-            this.btCancel.Size = new System.Drawing.Size(197, 32);
+            this.btCancel.Size = new System.Drawing.Size(148, 26);
             this.btCancel.TabIndex = 12;
             this.btCancel.Text = "Cancel";
             this.btCancel.UseVisualStyleBackColor = true;
@@ -170,9 +181,10 @@
             // btSaveClose
             // 
             this.btSaveClose.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btSaveClose.Location = new System.Drawing.Point(679, 907);
+            this.btSaveClose.Location = new System.Drawing.Point(509, 726);
+            this.btSaveClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btSaveClose.Name = "btSaveClose";
-            this.btSaveClose.Size = new System.Drawing.Size(197, 32);
+            this.btSaveClose.Size = new System.Drawing.Size(148, 26);
             this.btSaveClose.TabIndex = 13;
             this.btSaveClose.Text = "Save & close";
             this.btSaveClose.UseVisualStyleBackColor = true;
@@ -181,10 +193,10 @@
             // AddEditTournament
             // 
             this.AcceptButton = this.btSaveClose;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btCancel;
-            this.ClientSize = new System.Drawing.Size(1120, 951);
+            this.ClientSize = new System.Drawing.Size(840, 761);
             this.Controls.Add(this.btSaveClose);
             this.Controls.Add(this.btCancel);
             this.Controls.Add(this.regionsFilter);
@@ -197,6 +209,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbTournamentName);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AddEditTournament";
             this.Text = "Add/Edit Tournament";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddEditTournament_FormClosing);

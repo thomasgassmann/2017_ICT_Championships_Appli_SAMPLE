@@ -100,7 +100,7 @@
             // groupD
             // 
             this.groupD.AllowDrop = true;
-            this.groupD.GroupLetter = "C";
+            this.groupD.GroupLetter = "D";
             this.groupD.Location = new System.Drawing.Point(12, 535);
             this.groupD.Name = "groupD";
             this.groupD.Size = new System.Drawing.Size(482, 401);

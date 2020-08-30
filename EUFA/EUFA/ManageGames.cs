@@ -11,16 +11,15 @@ namespace EUFA
         private readonly string _stageCode;
         private List<Match> _allMatches;
         private List<Match> _shownMatches;
-        private readonly bool canEdit;
         private readonly int _tournamentId;
 
         public ManageGames(int tid, string stage)
         {
             _tournamentId = tid;
             _stageCode = stage;
-            matchList.CanEdit = Stage.StageDone(_tournamentId, stage);
-            matchList.OnDidEdit += this.MatchList_OnDidEdit;
             InitializeComponent();
+            matchList.CanEdit = !Stage.StageDone(_tournamentId, stage);
+            matchList.OnDidEdit += this.MatchList_OnDidEdit;
 
             var gameDescription = Stage.GetDescription(stage);
             this.Text = $"Manage {gameDescription} Games";

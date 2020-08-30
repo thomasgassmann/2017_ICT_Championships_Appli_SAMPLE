@@ -89,6 +89,7 @@ namespace EUFA
         {
             new AllocateTeamsToGroups(this.tournamentId).ShowDialog();
             LoadDidAlloc();
+            TryInitStage();
         }
 
         private void btManageGroupStage_Click(object sender, EventArgs e)

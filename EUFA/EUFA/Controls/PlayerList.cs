@@ -36,7 +36,10 @@ namespace EUFA.Controls
             set
             {
                 _participations = value;
-                RenderParticipations();
+                if (_participations != null)
+                {
+                    RenderParticipations();
+                }
             }
             get
             {
