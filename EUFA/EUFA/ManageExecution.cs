@@ -15,8 +15,8 @@ namespace EUFA
         {
             InitializeComponent();
             this.tournamentId = tournamentId;
-            LoadDidAlloc();
             TryInitStage();
+            LoadDidAlloc();
             LoadDoneLabels();
         }
 

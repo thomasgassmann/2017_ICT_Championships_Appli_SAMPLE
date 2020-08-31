@@ -16,6 +16,16 @@ namespace EUFA.Controls
             InitializeComponent();
         }
 
+        [Category("Data"), Description("EditEnabled")]
+        public bool EditEnabled
+        {
+            set
+            {
+                this.btAdd.Enabled = value;
+                this.btDelete.Enabled = value;
+            }
+        }
+
         [Category("Data"), Description("MatchId")]
         public int MatchId { get; set; }
 
@@ -69,7 +79,20 @@ namespace EUFA.Controls
             var diag = new AddEditPlayerStartingForm(this.Team, available.ToArray(), MatchId);
             if (diag.ShowDialog() == DialogResult.OK)
             {
-                this.Participation = this.Participation.Concat(new MatchParticipation[] { diag.Result }).ToList();
+                var newItem = diag.Result;
+                this.Participation = this.Participation.Concat(new MatchParticipation[] { newItem }).ToList();
+
+                var data = new EUFAEntities();
+                var toSave = new MatchParticipation
+                {
+                    MatchId = newItem.MatchId,
+                    PlayerId = newItem.PlayerId,
+                    Position = newItem.Position
+                };
+                data.MatchParticipations.Add(toSave);
+                data.TrySave();
+
+                newItem.Id = toSave.Id;
             }
         }
 
@@ -80,6 +103,10 @@ namespace EUFA.Controls
                 if (MessageBox.Show("Delete?", "Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     this.Participation = this.Participation.Where(x => x != par).ToList();
+                    var data = new EUFAEntities();
+                    var toRemove = data.MatchParticipations.Find(par.Id);
+                    data.MatchParticipations.Remove(toRemove);
+                    data.TrySave();
                 }
 
                 return;
