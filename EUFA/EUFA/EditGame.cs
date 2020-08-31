@@ -1,10 +1,8 @@
 ﻿using EUFA.Data;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace EUFA
@@ -62,6 +60,13 @@ namespace EUFA
             {
                 tabControl1.TabPages.Remove(eventTab);
             }
+
+            if (_match.Finished)
+            {
+                this.btAdd.Enabled = false;
+                this.btEditEvent.Enabled = false;
+                this.btDelete.Enabled = false;  
+            }
         }
 
         public void LoadPlayerLists()
@@ -97,7 +102,6 @@ namespace EUFA
             if (MessageBox.Show("Start?", "Start", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 this._match.Started = this.cbStarted.Checked;
-                this.SetResultLabel();
 
                 var data = new EUFAEntities();
                 var match = data.Matches.Find(this._match.Id);
@@ -105,13 +109,39 @@ namespace EUFA
                 data.TrySave();
 
                 _match.Started = true;
+                this.SetResultLabel();
             }
         }
 
         private void cbFinished_CheckedChanged(object sender, System.EventArgs e)
         {
-            this._match.Finished = this.cbFinished.Checked;
-            this.SetResultLabel();
+            if (!this._match.Started)
+            {
+                return;
+            }
+
+            if (MessageBox.Show("Finish?", "Finish", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                var data = new EUFAEntities();
+
+                var evs = data.MatchEvents.Where(x => x.MatchId == this._match.Id).AsNoTracking().ToList();
+                var r = MatchResultCalc.FromEvents(this._match, evs);
+                if (r.TeamACount == r.TeamBCount && this._match.StageCode != Stage.Group)
+                {
+                    MessageBox.Show("goals, bad, sad, add penalty shootout");
+                    return;
+                }
+
+                this._match.Finished = this.cbFinished.Checked;
+
+                var match = data.Matches.Find(this._match.Id);
+                match.Finished = true;
+                data.TrySave();
+
+                _match.Finished = true;
+
+                this.SetResultLabel();
+            }
         }
 
         private void btEditEvent_Click(object sender, System.EventArgs e)
