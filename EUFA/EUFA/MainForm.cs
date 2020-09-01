@@ -64,6 +64,7 @@ namespace EUFA
                 .ToList();
 
             bigMatchList1.Matches = items;
+            smallMatchList.Matches = items;
         }
 
         private void cbTournament_SelectedIndexChanged(object sender, EventArgs e)

@@ -14,23 +14,23 @@ namespace EUFA.Controls
             InitializeComponent();
         }
 
+
+        public static PictureBox GetPictureBox(TournamentParticipation p)
+        {
+            return new PictureBox
+            {
+                Image = p.Team.FlagContent != null ? Image.FromStream(new MemoryStream(p.Team.FlagContent)) : Resources.DefaultFlag,
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+        }
+
         public List<Match> Matches
         {
             set
             {
                 this.tableLayoutPanel.Controls.Clear();
 
-                PictureBox pictureBox(TournamentParticipation p)
-                {
-                    return new PictureBox
-                    {
-                        Image = p.Team.FlagContent != null ? Image.FromStream(new MemoryStream(p.Team.FlagContent)) : Resources.DefaultFlag,
-                        SizeMode = PictureBoxSizeMode.StretchImage
-                    };
-                }
 
-                this.tableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
-                
                 var i = 0;
                 foreach (var match in value)
                 {
@@ -41,7 +41,7 @@ namespace EUFA.Controls
                         Anchor = AnchorStyles.Right
                     }, 0, i);
 
-                    this.tableLayoutPanel.Controls.Add(pictureBox(match.TournamentParticipation), 1, i);
+                    this.tableLayoutPanel.Controls.Add(GetPictureBox(match.TournamentParticipation), 1, i);
 
                     this.tableLayoutPanel.Controls.Add(new Label
                     {
@@ -50,7 +50,7 @@ namespace EUFA.Controls
                         Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom
                     }, 2, i);
 
-                    this.tableLayoutPanel.Controls.Add(pictureBox(match.TournamentParticipation1), 3, i);
+                    this.tableLayoutPanel.Controls.Add(GetPictureBox(match.TournamentParticipation1), 3, i);
 
                     this.tableLayoutPanel.Controls.Add(new Label
                     {

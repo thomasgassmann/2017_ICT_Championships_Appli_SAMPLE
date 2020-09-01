@@ -266,6 +266,9 @@
     <EmbeddedResource Include="Controls\RegionFilter.resx">
       <DependentUpon>RegionFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SmallMatchList.resx">
+      <DependentUpon>SmallMatchList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TeamItem.resx">
       <DependentUpon>TeamItem.cs</DependentUpon>
     </EmbeddedResource>

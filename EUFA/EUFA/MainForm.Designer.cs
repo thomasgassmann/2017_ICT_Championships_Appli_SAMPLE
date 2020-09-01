@@ -44,6 +44,7 @@
             this.lbTournament = new System.Windows.Forms.Label();
             this.lbTournamentDate = new System.Windows.Forms.Label();
             this.bigMatchList1 = new EUFA.Controls.BigMatchList();
+            this.smallMatchList = new EUFA.Controls.SmallMatchList();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +68,7 @@
             this.exitToolStripMenuItem,
             this.generateToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 32);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 29);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
@@ -91,7 +92,7 @@
             this.manageTeamsToolStripMenuItem,
             this.manageExecutionToolStripMenuItem});
             this.manageToolStripMenuItem.Name = "manageToolStripMenuItem";
-            this.manageToolStripMenuItem.Size = new System.Drawing.Size(92, 32);
+            this.manageToolStripMenuItem.Size = new System.Drawing.Size(92, 29);
             this.manageToolStripMenuItem.Text = "Manage";
             // 
             // manageTournamentsToolStripMenuItem
@@ -202,11 +203,19 @@
             this.bigMatchList1.Size = new System.Drawing.Size(639, 440);
             this.bigMatchList1.TabIndex = 8;
             // 
+            // smallMatchList
+            // 
+            this.smallMatchList.Location = new System.Drawing.Point(868, 386);
+            this.smallMatchList.Name = "smallMatchList";
+            this.smallMatchList.Size = new System.Drawing.Size(384, 265);
+            this.smallMatchList.TabIndex = 9;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1693, 1053);
+            this.Controls.Add(this.smallMatchList);
             this.Controls.Add(this.bigMatchList1);
             this.Controls.Add(this.lbTournamentDate);
             this.Controls.Add(this.lbTournament);
@@ -245,6 +254,7 @@
         private System.Windows.Forms.Label lbTournamentDate;
         private System.Windows.Forms.ToolStripMenuItem generateToolStripMenuItem;
         private Controls.BigMatchList bigMatchList1;
+        private Controls.SmallMatchList smallMatchList;
     }
 }
 
