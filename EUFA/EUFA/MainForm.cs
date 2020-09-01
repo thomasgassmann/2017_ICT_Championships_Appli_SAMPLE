@@ -1,5 +1,6 @@
 ﻿using EUFA.Data;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -14,6 +15,10 @@ namespace EUFA
         {
             InitializeComponent();
             LoadTournaments();
+            if (this.cbTournament.Items.Count != 0)
+            {
+                cbTournament.SelectedIndex = 0;
+            }
         }
 
         private void LoadTournaments()
@@ -48,6 +53,19 @@ namespace EUFA
             new ManageExecution(selected.Id).ShowDialog();
         }
 
+        private void LoadGrid()
+        {
+            var items = new EUFAEntities().Matches
+                .Include(x => x.MatchEvents)
+                .Include(x => x.TournamentParticipation.Team)
+                .Include(x => x.TournamentParticipation1.Team)
+                .Where(x => x.TournamentParticipation.TournamentId == selected.Id)
+                .AsNoTracking()
+                .ToList();
+
+            bigMatchList1.Matches = items;
+        }
+
         private void cbTournament_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((sender as ComboBox).SelectedItem is KeyWithView res)
@@ -56,6 +74,7 @@ namespace EUFA
                 selected = tournament;
                 lbTournamentDate.Text = Utils.FormatFromTo(tournament.StartDate, tournament.EndDate);
                 lbTournament.Text = res.Value;
+                LoadGrid();
             }
             else
             {

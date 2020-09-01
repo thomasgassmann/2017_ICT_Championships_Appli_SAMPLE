@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEditGameEvent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditGameEvent.Designer.cs">
+      <DependentUpon>AddEditGameEvent.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEditPlayer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,12 @@
     </Compile>
     <Compile Include="AllocateTeamsToGroups.Designer.cs">
       <DependentUpon>AllocateTeamsToGroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BigMatchList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BigMatchList.Designer.cs">
+      <DependentUpon>BigMatchList.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DateOnlyPicker.cs">
       <SubType>Component</SubType>
@@ -118,6 +130,12 @@
     </Compile>
     <Compile Include="Controls\RegionFilter.Designer.cs">
       <DependentUpon>RegionFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SmallMatchList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SmallMatchList.Designer.cs">
+      <DependentUpon>SmallMatchList.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TeamInGroup.cs" />
     <Compile Include="Controls\TeamItem.cs">
@@ -210,6 +228,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stage.cs" />
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="AddEditGameEvent.resx">
+      <DependentUpon>AddEditGameEvent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddEditPlayer.resx">
       <DependentUpon>AddEditPlayer.cs</DependentUpon>
     </EmbeddedResource>
@@ -226,6 +247,9 @@
     <EmbeddedResource Include="AllocateTeamsToGroups.resx">
       <DependentUpon>AllocateTeamsToGroups.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BigMatchList.resx">
+      <DependentUpon>BigMatchList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Group.resx">
       <DependentUpon>Group.cs</DependentUpon>
