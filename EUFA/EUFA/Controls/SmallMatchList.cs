@@ -1,5 +1,6 @@
 ﻿using EUFA.Data;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace EUFA.Controls
@@ -31,37 +32,47 @@ namespace EUFA.Controls
                 var i = 0;
                 foreach (var match in value)
                 {
+                    var bold = new Font(Label.DefaultFont, FontStyle.Bold);
+                    var res = MatchResultCalc.FromEvents(match, match.MatchEvents);
+                    var winer = MatchResultCalc.Winner(match, match.MatchEvents);
                     var pictureA = BigMatchList.GetPictureBox(match.TournamentParticipation);
                     var pictureB = BigMatchList.GetPictureBox(match.TournamentParticipation1);
 
                     var r = GetChild();
+                    r.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 60));
+                    r.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize, 0));
                     r.Controls.Add(pictureA, 0, 0);
                     r.Controls.Add(pictureB, 0, 1);
                     r.Controls.Add(new Label
                     {
                         Text = match.TournamentParticipation.Team.CountryCode,
-                        Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
+                        Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
+                        TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+                        Font = match.TournamentParticipation.TeamId == winer ? bold : Label.DefaultFont
                     }, 1, 0);
                     r.Controls.Add(new Label
                     {
                         Text = match.TournamentParticipation1.Team.CountryCode,
-                        Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
+                        Font = match.TournamentParticipation1.TeamId == winer ? bold : Label.DefaultFont,
+                        Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
+                        TextAlign = System.Drawing.ContentAlignment.MiddleLeft
                     }, 1, 1);
 
                     this.tableLayoutPanel.Controls.Add(r, 0, i);
 
                     var r2 = GetChild();
 
-                    var res = MatchResultCalc.FromEvents(match, match.MatchEvents);
                     r2.Controls.Add(new Label
                     {
-                        Text = res.TeamACount.ToString(),
-                        Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
+                        Text = res.OverViewA(),
+                        Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
+                        TextAlign = System.Drawing.ContentAlignment.MiddleCenter
                     }, 0, 0);
                     r2.Controls.Add(new Label
                     {
-                        Text = res.TeamACount.ToString(),
-                        Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
+                        Text = res.OverViewB(),
+                        Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
+                        TextAlign = System.Drawing.ContentAlignment.MiddleCenter
                     }, 0, 1);
 
                     this.tableLayoutPanel.Controls.Add(r2, 1, i);

@@ -20,7 +20,7 @@ namespace EUFA.Controls
             return new PictureBox
             {
                 Image = p.Team.FlagContent != null ? Image.FromStream(new MemoryStream(p.Team.FlagContent)) : Resources.DefaultFlag,
-                SizeMode = PictureBoxSizeMode.StretchImage
+                SizeMode = PictureBoxSizeMode.Zoom
             };
         }
 
@@ -34,9 +34,13 @@ namespace EUFA.Controls
                 var i = 0;
                 foreach (var match in value)
                 {
+                    var res = MatchResultCalc.FromEvents(match, match.MatchEvents);
+                    var winner = MatchResultCalc.Winner(match, match.MatchEvents);
+                    var bold = new Font(Label.DefaultFont, FontStyle.Bold);
                     this.tableLayoutPanel.Controls.Add(new Label
                     {
                         Text = match.TournamentParticipation.Team.CountryName,
+                        Font = winner == match.TournamentParticipation.Team.Id ? bold : Label.DefaultFont,
                         TextAlign = ContentAlignment.MiddleRight,
                         Anchor = AnchorStyles.Right
                     }, 0, i);
@@ -46,7 +50,7 @@ namespace EUFA.Controls
                     this.tableLayoutPanel.Controls.Add(new Label
                     {
                         TextAlign = ContentAlignment.MiddleCenter,
-                        Text = MatchResultCalc.FromEvents(match, match.MatchEvents).ToString(),
+                        Text = res.Overview(),
                         Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom
                     }, 2, i);
 
@@ -55,6 +59,7 @@ namespace EUFA.Controls
                     this.tableLayoutPanel.Controls.Add(new Label
                     {
                         Text = match.TournamentParticipation1.Team.CountryName,
+                        Font = winner == match.TournamentParticipation1.Team.Id ? bold : Label.DefaultFont,
                         TextAlign = ContentAlignment.MiddleLeft,
                         Anchor = AnchorStyles.Left
                     }, 4, i);

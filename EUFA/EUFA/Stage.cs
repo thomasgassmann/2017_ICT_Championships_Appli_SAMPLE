@@ -251,7 +251,7 @@ namespace EUFA
                 .Where(x => x.TournamentParticipation.TournamentId == tournamentId)
                 .Where(x => x.StageCode == stage)
                 .Count();
-            return items != 0;
+            return items == GamesInStage(stage);
         }
 
         public static int GamesInStage(string stage)
