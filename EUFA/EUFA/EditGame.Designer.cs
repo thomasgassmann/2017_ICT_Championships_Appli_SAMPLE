@@ -143,7 +143,6 @@
             this.cbStarted.TabIndex = 6;
             this.cbStarted.Text = "Game started";
             this.cbStarted.UseVisualStyleBackColor = true;
-            this.cbStarted.CheckedChanged += new System.EventHandler(this.cbStarted_CheckedChanged);
             // 
             // cbFinished
             // 
@@ -155,7 +154,6 @@
             this.cbFinished.TabIndex = 7;
             this.cbFinished.Text = "Game finished";
             this.cbFinished.UseVisualStyleBackColor = true;
-            this.cbFinished.CheckedChanged += new System.EventHandler(this.cbFinished_CheckedChanged);
             // 
             // lbResult
             // 

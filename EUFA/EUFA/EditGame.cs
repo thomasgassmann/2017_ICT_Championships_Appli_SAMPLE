@@ -18,8 +18,21 @@ namespace EUFA
             this.cbFinished.Checked = _match.Finished;
             this.cbStarted.Checked = _match.Started;
 
+            if (this.cbStarted.Checked)
+            {
+                this.cbStarted.Enabled = false;
+            }
+
+            if (this.cbFinished.Checked)
+            {
+                this.cbFinished.Enabled = false;
+            }
+
             SetResultLabel();
             LoadPlayerLists();
+
+            this.cbStarted.Click += new System.EventHandler(this.cbStarted_CheckedChanged);
+            this.cbFinished.Click += new System.EventHandler(this.cbFinished_CheckedChanged);
         }
 
         public void LoadEvents()
@@ -91,7 +104,7 @@ namespace EUFA
         {
             bool TeamComplete(IList<MatchParticipation> parts) => parts.Count == 11 && parts.Any(x => x.Position == PlayerPosition.Goalkeeper);
 
-            if (TeamComplete(playerListTeamA.Participation) || TeamComplete(playerListTeamB.Participation))
+            if (!TeamComplete(playerListTeamA.Participation) || !TeamComplete(playerListTeamB.Participation))
             {
                 (sender as CheckBox).Checked = false;
                 MessageBox.Show("need 11 in both, need goalkeepr");
@@ -110,6 +123,8 @@ namespace EUFA
                 _match.Started = true;
                 this.SetResultLabel();
             }
+
+            this.cbStarted.Checked = false;
         }
 
         private void cbFinished_CheckedChanged(object sender, System.EventArgs e)
