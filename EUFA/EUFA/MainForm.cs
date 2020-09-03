@@ -36,11 +36,13 @@ namespace EUFA
         {
             new ManageTournaments().ShowDialog();
             LoadTournaments();
+            LoadGrid();
         }
 
         private void ManageTeams_Click(object sender, EventArgs e)
         {
             new ManageTeams().ShowDialog();
+            LoadGrid();
         }
 
         private void ManageExecution_Click(object sender, EventArgs e)
@@ -51,6 +53,7 @@ namespace EUFA
             }
 
             new ManageExecution(selected.Id).ShowDialog();
+            LoadGrid();
         }
 
         private void LoadGrid()
@@ -63,8 +66,17 @@ namespace EUFA
                 .AsNoTracking()
                 .ToList();
 
-            bigMatchList1.Matches = items;
-            smallMatchList.Matches = items;
+            matchListGroupA.Matches = items.Where(x => x.StageCode == Stage.Group && x.TournamentParticipation.GroupLetter == "A").ToList();
+            matchListGroupB.Matches = items.Where(x => x.StageCode == Stage.Group && x.TournamentParticipation.GroupLetter == "B").ToList();
+            matchListGroupC.Matches = items.Where(x => x.StageCode == Stage.Group && x.TournamentParticipation.GroupLetter == "C").ToList();
+            matchListGroupD.Matches = items.Where(x => x.StageCode == Stage.Group && x.TournamentParticipation.GroupLetter == "D").ToList();
+            matchListGroupE.Matches = items.Where(x => x.StageCode == Stage.Group && x.TournamentParticipation.GroupLetter == "E").ToList();
+            matchListGroupF.Matches = items.Where(x => x.StageCode == Stage.Group && x.TournamentParticipation.GroupLetter == "F").ToList();
+            groupOf16MatchList.Matches = items.Where(x => x.StageCode == Stage.RoundOf16).ToList();
+            quarterFinalList.Matches = items.Where(x => x.StageCode == Stage.QuarterFinal).ToList();
+            finalList.Matches = items.Where(x => x.StageCode == Stage.Final).ToList();
+            semiFinalList1.Matches = items.Where(x => x.StageCode == Stage.SemiFinal).Take(1).ToList();
+            semiFinalList2.Matches = items.Where(x => x.StageCode == Stage.SemiFinal).Skip(1).ToList();
         }
 
         private void cbTournament_SelectedIndexChanged(object sender, EventArgs e)

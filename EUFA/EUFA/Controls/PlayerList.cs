@@ -34,6 +34,12 @@ namespace EUFA.Controls
         {
             set
             {
+                if (value == null)
+                {
+                    _team = null;
+                    return;
+                }
+
                 lbTitle.Text = $"Team {value.CountryName}";
                 _team = value;
             }

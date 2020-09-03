@@ -43,9 +43,40 @@
             this.button3 = new System.Windows.Forms.Button();
             this.lbTournament = new System.Windows.Forms.Label();
             this.lbTournamentDate = new System.Windows.Forms.Label();
-            this.bigMatchList1 = new EUFA.Controls.BigMatchList();
-            this.smallMatchList = new EUFA.Controls.SmallMatchList();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupOf16MatchList = new EUFA.Controls.BigMatchList();
+            this.matchListGroupA = new EUFA.Controls.BigMatchList();
+            this.matchListGroupB = new EUFA.Controls.BigMatchList();
+            this.matchListGroupC = new EUFA.Controls.BigMatchList();
+            this.matchListGroupF = new EUFA.Controls.BigMatchList();
+            this.matchListGroupE = new EUFA.Controls.BigMatchList();
+            this.matchListGroupD = new EUFA.Controls.BigMatchList();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.quarterFinalList = new EUFA.Controls.SmallMatchList();
+            this.semiFinalList1 = new EUFA.Controls.SmallMatchList();
+            this.semiFinalList2 = new EUFA.Controls.SmallMatchList();
+            this.finalList = new EUFA.Controls.SmallMatchList();
             this.menuStrip1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.groupBox11.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -58,7 +89,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1693, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1964, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -120,7 +151,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 1008);
+            this.label1.Location = new System.Drawing.Point(12, 1466);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 20);
@@ -132,7 +163,7 @@
             this.cbTournament.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbTournament.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTournament.FormattingEnabled = true;
-            this.cbTournament.Location = new System.Drawing.Point(109, 1006);
+            this.cbTournament.Location = new System.Drawing.Point(109, 1464);
             this.cbTournament.Margin = new System.Windows.Forms.Padding(2);
             this.cbTournament.Name = "cbTournament";
             this.cbTournament.Size = new System.Drawing.Size(248, 28);
@@ -142,7 +173,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(361, 1006);
+            this.button1.Location = new System.Drawing.Point(361, 1464);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(201, 44);
@@ -154,7 +185,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(566, 1006);
+            this.button2.Location = new System.Drawing.Point(566, 1464);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(201, 43);
@@ -166,7 +197,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button3.Location = new System.Drawing.Point(772, 1006);
+            this.button3.Location = new System.Drawing.Point(772, 1464);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(201, 44);
@@ -196,27 +227,260 @@
             this.lbTournamentDate.TabIndex = 7;
             this.lbTournamentDate.Text = "-";
             // 
-            // bigMatchList1
+            // groupBox4
             // 
-            this.bigMatchList1.Location = new System.Drawing.Point(77, 211);
-            this.bigMatchList1.Name = "bigMatchList1";
-            this.bigMatchList1.Size = new System.Drawing.Size(639, 440);
-            this.bigMatchList1.TabIndex = 8;
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.matchListGroupD);
+            this.groupBox4.Location = new System.Drawing.Point(16, 1085);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(507, 374);
+            this.groupBox4.TabIndex = 9;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Group D";
             // 
-            // smallMatchList
+            // groupBox1
             // 
-            this.smallMatchList.Location = new System.Drawing.Point(868, 386);
-            this.smallMatchList.Name = "smallMatchList";
-            this.smallMatchList.Size = new System.Drawing.Size(384, 265);
-            this.smallMatchList.TabIndex = 9;
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.matchListGroupE);
+            this.groupBox1.Location = new System.Drawing.Point(529, 1085);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(507, 374);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Group E";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.matchListGroupF);
+            this.groupBox2.Location = new System.Drawing.Point(1042, 1085);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(507, 374);
+            this.groupBox2.TabIndex = 11;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Group F";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.matchListGroupC);
+            this.groupBox3.Location = new System.Drawing.Point(1048, 705);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(507, 374);
+            this.groupBox3.TabIndex = 12;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Group C";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.matchListGroupB);
+            this.groupBox5.Location = new System.Drawing.Point(529, 705);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(507, 374);
+            this.groupBox5.TabIndex = 13;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Group B";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox6.Controls.Add(this.matchListGroupA);
+            this.groupBox6.Location = new System.Drawing.Point(16, 705);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(507, 374);
+            this.groupBox6.TabIndex = 12;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Group A";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.groupOf16MatchList);
+            this.groupBox7.Location = new System.Drawing.Point(16, 98);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(507, 601);
+            this.groupBox7.TabIndex = 14;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Round of 16";
+            // 
+            // groupOf16MatchList
+            // 
+            this.groupOf16MatchList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupOf16MatchList.Location = new System.Drawing.Point(6, 25);
+            this.groupOf16MatchList.Name = "groupOf16MatchList";
+            this.groupOf16MatchList.Size = new System.Drawing.Size(495, 555);
+            this.groupOf16MatchList.TabIndex = 0;
+            // 
+            // matchListGroupA
+            // 
+            this.matchListGroupA.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.matchListGroupA.Location = new System.Drawing.Point(6, 25);
+            this.matchListGroupA.Name = "matchListGroupA";
+            this.matchListGroupA.Size = new System.Drawing.Size(495, 343);
+            this.matchListGroupA.TabIndex = 0;
+            // 
+            // matchListGroupB
+            // 
+            this.matchListGroupB.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.matchListGroupB.Location = new System.Drawing.Point(12, 25);
+            this.matchListGroupB.Name = "matchListGroupB";
+            this.matchListGroupB.Size = new System.Drawing.Size(495, 343);
+            this.matchListGroupB.TabIndex = 1;
+            // 
+            // matchListGroupC
+            // 
+            this.matchListGroupC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.matchListGroupC.Location = new System.Drawing.Point(6, 25);
+            this.matchListGroupC.Name = "matchListGroupC";
+            this.matchListGroupC.Size = new System.Drawing.Size(495, 343);
+            this.matchListGroupC.TabIndex = 2;
+            // 
+            // matchListGroupF
+            // 
+            this.matchListGroupF.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.matchListGroupF.Location = new System.Drawing.Point(6, 25);
+            this.matchListGroupF.Name = "matchListGroupF";
+            this.matchListGroupF.Size = new System.Drawing.Size(495, 343);
+            this.matchListGroupF.TabIndex = 5;
+            // 
+            // matchListGroupE
+            // 
+            this.matchListGroupE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.matchListGroupE.Location = new System.Drawing.Point(12, 25);
+            this.matchListGroupE.Name = "matchListGroupE";
+            this.matchListGroupE.Size = new System.Drawing.Size(495, 343);
+            this.matchListGroupE.TabIndex = 4;
+            // 
+            // matchListGroupD
+            // 
+            this.matchListGroupD.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.matchListGroupD.Location = new System.Drawing.Point(6, 25);
+            this.matchListGroupD.Name = "matchListGroupD";
+            this.matchListGroupD.Size = new System.Drawing.Size(495, 343);
+            this.matchListGroupD.TabIndex = 3;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.quarterFinalList);
+            this.groupBox8.Location = new System.Drawing.Point(623, 98);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(302, 601);
+            this.groupBox8.TabIndex = 15;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Quarter-finals";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.semiFinalList1);
+            this.groupBox9.Location = new System.Drawing.Point(973, 181);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(306, 193);
+            this.groupBox9.TabIndex = 16;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Semi-finals";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.semiFinalList2);
+            this.groupBox10.Location = new System.Drawing.Point(973, 419);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(306, 193);
+            this.groupBox10.TabIndex = 17;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Semi-finals";
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.finalList);
+            this.groupBox11.Location = new System.Drawing.Point(1335, 305);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(302, 193);
+            this.groupBox11.TabIndex = 17;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Final";
+            // 
+            // quarterFinalList
+            // 
+            this.quarterFinalList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.quarterFinalList.Location = new System.Drawing.Point(6, 25);
+            this.quarterFinalList.Name = "quarterFinalList";
+            this.quarterFinalList.Size = new System.Drawing.Size(290, 555);
+            this.quarterFinalList.TabIndex = 0;
+            // 
+            // semiFinalList1
+            // 
+            this.semiFinalList1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.semiFinalList1.Location = new System.Drawing.Point(6, 25);
+            this.semiFinalList1.Name = "semiFinalList1";
+            this.semiFinalList1.Size = new System.Drawing.Size(294, 162);
+            this.semiFinalList1.TabIndex = 0;
+            // 
+            // semiFinalList2
+            // 
+            this.semiFinalList2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.semiFinalList2.Location = new System.Drawing.Point(6, 25);
+            this.semiFinalList2.Name = "semiFinalList2";
+            this.semiFinalList2.Size = new System.Drawing.Size(294, 162);
+            this.semiFinalList2.TabIndex = 1;
+            // 
+            // finalList
+            // 
+            this.finalList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.finalList.Location = new System.Drawing.Point(6, 25);
+            this.finalList.Name = "finalList";
+            this.finalList.Size = new System.Drawing.Size(290, 162);
+            this.finalList.TabIndex = 2;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1693, 1053);
-            this.Controls.Add(this.smallMatchList);
-            this.Controls.Add(this.bigMatchList1);
+            this.ClientSize = new System.Drawing.Size(1964, 1511);
+            this.Controls.Add(this.groupBox11);
+            this.Controls.Add(this.groupBox10);
+            this.Controls.Add(this.groupBox9);
+            this.Controls.Add(this.groupBox8);
+            this.Controls.Add(this.groupBox7);
+            this.Controls.Add(this.groupBox6);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.lbTournamentDate);
             this.Controls.Add(this.lbTournament);
             this.Controls.Add(this.button3);
@@ -231,6 +495,17 @@
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox11.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -253,8 +528,28 @@
         private System.Windows.Forms.Label lbTournament;
         private System.Windows.Forms.Label lbTournamentDate;
         private System.Windows.Forms.ToolStripMenuItem generateToolStripMenuItem;
-        private Controls.BigMatchList bigMatchList1;
-        private Controls.SmallMatchList smallMatchList;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private Controls.BigMatchList matchListGroupA;
+        private Controls.BigMatchList matchListGroupD;
+        private Controls.BigMatchList matchListGroupE;
+        private Controls.BigMatchList matchListGroupF;
+        private Controls.BigMatchList matchListGroupC;
+        private Controls.BigMatchList matchListGroupB;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private Controls.BigMatchList groupOf16MatchList;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private Controls.SmallMatchList quarterFinalList;
+        private Controls.SmallMatchList semiFinalList1;
+        private Controls.SmallMatchList semiFinalList2;
+        private Controls.SmallMatchList finalList;
     }
 }
 
