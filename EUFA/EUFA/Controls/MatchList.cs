@@ -29,6 +29,8 @@ namespace EUFA.Controls
             set
             {
                 stackPanel.Controls.Clear();
+                stackPanel.WrapContents = false;
+                stackPanel.AutoScroll = true;
                 foreach (var match in value)
                 {
                     var item = new MatchItem
