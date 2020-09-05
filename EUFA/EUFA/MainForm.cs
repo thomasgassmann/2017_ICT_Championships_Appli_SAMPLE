@@ -1,5 +1,6 @@
 ﻿using EUFA.Data;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
@@ -98,6 +99,17 @@ namespace EUFA
         private void generateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var data = new EUFAEntities();
+
+            data.Matches.RemoveRange(data.Matches.ToList());
+            data.TournamentParticipations.RemoveRange(data.TournamentParticipations.ToList());
+            data.Teams.RemoveRange(data.Teams.ToList());
+            data.Players.RemoveRange(data.Players.ToList());
+            data.Tournaments.RemoveRange(data.Tournaments.ToList());
+            data.MatchParticipations.RemoveRange(data.MatchParticipations.ToList());
+            data.MatchEvents.RemoveRange(data.MatchEvents.ToList());
+
+            data.SaveChanges();
+
             var random = new Random();
 
             var regions = data.Regions.ToList();
@@ -130,12 +142,23 @@ namespace EUFA
                     Name = RandomString(),
                     TournamentParticipations = Enumerable.Range(0, 24).Select((x, p) => new TournamentParticipation
                     {
-                        Team = GetTeam()
+                        Team = GetTeam(),
+                        GroupLetter = char.ConvertFromUtf32('A' + (p % 6)),
+                        GroupNumber = Math.Max(p / 4, 0) + 1
                     }).ToList()
                 });
             }
 
+
             data.SaveChanges();
+            var tournament = data.Tournaments.First();
+
+            Stage.Init(tournament.Id, Stage.Group);
+
+            var matches = data.Matches.Where(x => x.TournamentParticipation.TournamentId == tournament.Id && x.StageCode == Stage.Group);
+
+
+
         }
     }
 }
