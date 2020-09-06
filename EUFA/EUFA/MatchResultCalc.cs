@@ -60,7 +60,7 @@ namespace EUFA
                 return $"{count} ({penalty})";
             }
 
-            return $"{TeamACount}";
+            return $"{count}";
         }
 
         public static int Winner(Match match, IEnumerable<MatchEvent> results)

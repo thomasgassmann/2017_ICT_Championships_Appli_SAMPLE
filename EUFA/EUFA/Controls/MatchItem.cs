@@ -31,7 +31,7 @@ namespace EUFA.Controls
             {
                 _match = value;
                 lbvs.Text = $"{value.TournamentParticipation.Team.CountryName} - {value.TournamentParticipation1.Team.CountryName}";
-                lbResult.Text = new MatchResultCalc().ToString();
+                lbResult.Text = MatchResultCalc.FromEvents(value, value.MatchEvents).ToString();
             }
         }
 

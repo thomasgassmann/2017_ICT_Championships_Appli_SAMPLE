@@ -135,16 +135,26 @@ namespace EUFA
 
             for (var i = 0; i < random.Next(1, 7); i++)
             {
+                var groupCount = new Dictionary<string, int>();
                 data.Tournaments.Add(new Tournament
                 {
                     StartDate = new DateTime(random.Next(2000, 2015), 01, 01, 0, 0, 0, 0),
                     EndDate = new DateTime(random.Next(2016, 2020), 01, 01, 0, 0, 0, 0),
                     Name = RandomString(),
-                    TournamentParticipations = Enumerable.Range(0, 24).Select((x, p) => new TournamentParticipation
+                    TournamentParticipations = Enumerable.Range(0, 24).Select((x, p) =>
                     {
-                        Team = GetTeam(),
-                        GroupLetter = char.ConvertFromUtf32('A' + (p % 6)),
-                        GroupNumber = Math.Max(p / 4, 0) + 1
+                        var group = char.ConvertFromUtf32('A' + (p % 6));
+                        if (!groupCount.ContainsKey(group))
+                        {
+                            groupCount.Add(group, 0);
+                        }
+
+                        return new TournamentParticipation
+                        {
+                            Team = GetTeam(),
+                            GroupLetter = group,
+                            GroupNumber = ++groupCount[group]
+                        };
                     }).ToList()
                 });
             }
@@ -153,11 +163,54 @@ namespace EUFA
             data.SaveChanges();
             var tournament = data.Tournaments.First();
 
-            Stage.Init(tournament.Id, Stage.Group);
+            foreach (var stage in Stage.All)
+            {
+                Stage.Init(tournament.Id, stage);
 
-            var matches = data.Matches.Where(x => x.TournamentParticipation.TournamentId == tournament.Id && x.StageCode == Stage.Group);
+                var matches = data.Matches.Where(x => x.TournamentParticipation.TournamentId == tournament.Id && x.StageCode == stage);
 
 
+                foreach (var match in matches)
+                {
+                    Action<List<Player>> add = (p) =>
+                    {
+                        match.MatchParticipations.Add(new MatchParticipation
+                        {
+                            Position = PlayerPosition.Goalkeeper,
+                            PlayerId = p[0].Id,
+                            MatchId = match.Id
+                        });
+                        for (var i = 0; i < 10; i++)
+                        {
+                            match.MatchParticipations.Add(new MatchParticipation
+                            {
+                                PlayerId = p[i + 1].Id,
+                                Position = p[i + 1].Position,
+                                MatchId = match.Id
+                            });
+                        }
+
+                        match.MatchEvents.Add(new MatchEvent
+                        {
+                            EventType = MatchEventCode.Goal,
+                            MatchId = match.Id,
+                            MatchMinute = 1,
+                            TeamA = true,
+                            AdditionalInformation = "bla"
+                        });
+                    };
+
+                    match.Started = true;
+                    match.Finished = true;
+                    var playersA = match.TournamentParticipation.Team.Players.ToList();
+                    var playersB = match.TournamentParticipation1.Team.Players.ToList();
+
+                    add(playersA);
+                    add(playersB);
+                }
+
+                data.SaveChanges();
+            }
 
         }
     }
