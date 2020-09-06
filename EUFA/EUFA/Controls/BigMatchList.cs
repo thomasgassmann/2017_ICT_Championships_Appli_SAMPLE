@@ -40,7 +40,7 @@ namespace EUFA.Controls
                     this.tableLayoutPanel.Controls.Add(new Label
                     {
                         Text = match.TournamentParticipation.Team.CountryName,
-                        Font = winner == match.TournamentParticipation.Team.Id ? bold : Label.DefaultFont,
+                        Font = winner == match.TeamA ? bold : Label.DefaultFont,
                         TextAlign = ContentAlignment.MiddleRight,
                         Anchor = AnchorStyles.Right
                     }, 0, i);
@@ -59,7 +59,7 @@ namespace EUFA.Controls
                     this.tableLayoutPanel.Controls.Add(new Label
                     {
                         Text = match.TournamentParticipation1.Team.CountryName,
-                        Font = winner == match.TournamentParticipation1.Team.Id ? bold : Label.DefaultFont,
+                        Font = winner == match.TeamB ? bold : Label.DefaultFont,
                         TextAlign = ContentAlignment.MiddleLeft,
                         Anchor = AnchorStyles.Left
                     }, 4, i);

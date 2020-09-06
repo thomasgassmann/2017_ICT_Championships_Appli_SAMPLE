@@ -48,12 +48,12 @@ namespace EUFA.Controls
                         Text = match.TournamentParticipation.Team.CountryCode,
                         Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
                         TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
-                        Font = match.TournamentParticipation.TeamId == winer ? bold : Label.DefaultFont
+                        Font = match.TeamA == winer ? bold : Label.DefaultFont
                     }, 1, 0);
                     r.Controls.Add(new Label
                     {
                         Text = match.TournamentParticipation1.Team.CountryCode,
-                        Font = match.TournamentParticipation1.TeamId == winer ? bold : Label.DefaultFont,
+                        Font = match.TeamB == winer ? bold : Label.DefaultFont,
                         Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
                         TextAlign = System.Drawing.ContentAlignment.MiddleLeft
                     }, 1, 1);
