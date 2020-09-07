@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -172,7 +173,7 @@ namespace EUFA
 
                 foreach (var match in matches)
                 {
-                    Action<List<Player>> add = (p) =>
+                    void add(List<Player> p)
                     {
                         match.MatchParticipations.Add(new MatchParticipation
                         {
@@ -198,7 +199,7 @@ namespace EUFA
                             TeamA = true,
                             AdditionalInformation = "bla"
                         });
-                    };
+                    }
 
                     match.Started = true;
                     match.Finished = true;
@@ -212,6 +213,15 @@ namespace EUFA
                 data.SaveChanges();
             }
 
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm_Paint(object sender, PaintEventArgs e)
+        {
         }
     }
 }

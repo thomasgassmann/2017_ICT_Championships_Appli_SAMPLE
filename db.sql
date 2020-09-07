@@ -75,3 +75,4 @@ create table MatchEvents(
 	EventType varchar(10) not null,
 	AdditionalInformation varchar(200) not null
 );
+
